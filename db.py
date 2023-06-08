@@ -23,17 +23,21 @@ class DB:
             for sub_category in category['sub_category']:
                 self.sub_categories.insert(Document({'id': sub_category['id'], 'name': sub_category['name'], 'image': sub_category['image'], 'category': category['id']}, doc_id=sub_category['id']))
                 for product in sub_category['products']:
-                    self.products.insert(Document({'id': product['id'], 'name': product['name'], 'image': product['image'], 'price': product['price'], 'sub_category': sub_category['id']}, doc_id=product['id']))
+                    self.products.insert(Document({'id': product['id'], 'name': product['name'], 'image': product['image'], 'price': product['price'], 'sub_category': sub_category['id'], 'category':category['id']}, doc_id=product['id']))
         return data
-        
-    
+           
     def get_categories(self):
         categories = self.categories.all()
-        data = []
-        for category in categories:
-            data.append({'id': category['id'], 'name': category['name'], 'image': category['image']})
+        return categories
+    
+    def get_sub_categories(self, categories_id):
+        data = self.sub_categories.search(Query().category == categories_id)
         return data
     
+    def get_product(self, sub_categories_id):
+        data = self.products.search(Query().sub_category == sub_categories_id)
+        return data
+
     def get_products(self, category_id):
         products = self.categories
 
@@ -73,13 +77,6 @@ class DB:
         cart = requests.post(base_url + 'add-cart/', data=cart_data)
         return cart
 
-test = DB('db.json')
-start = test.get_start()
-# add_user = test.updeate_user(123456)
-# add_user = test.add_user('test', 'test', 123456)
-# add_user = test.add_user('test', 'test', 123456)
-# get_user = test.get_user(123456)
-# delete_user = test.delete_user(123456)
-# add_cart = test.add_cart(2342, 1, 1)
-# get_categories = test.get_categories()
-# print(get_categories)
+# test = DB('db.json')
+# get_sub_category = test.get_product(5)
+# print(get_sub_category)
