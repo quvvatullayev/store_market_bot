@@ -39,6 +39,22 @@ class DB:
         User = Query()
         data = self.products.search((User.sub_category == sub_categories_id) & (User.chat_id == chat_id))
         return data
+    
+    def delete_start(self, chat_id):
+        User = Query()
+        data_categories = self.categories.search(User.chat_id == chat_id)
+        data_sub_categories = self.sub_categories.search(User.chat_id == chat_id)
+        data_product = self.products.search(User.chat_id == chat_id)
+
+        for i in data_categories:
+            self.categories.remove(doc_ids=[i['id']])
+
+        for i in data_sub_categories:
+            self.sub_categories.remove(doc_ids=[i['id']])
+
+        for i in data_product:
+            self.products.remove(doc_ids=[i['id']])
+        
 
     def get_products(self, category_id):
         products = self.categories
@@ -79,6 +95,6 @@ class DB:
         cart = requests.post(base_url + 'add-cart/', data=cart_data)
         return cart
 
-test = DB('db.json')
-get_sub_category = test.get_product(5,45454545)
-print(get_sub_category)
+# test = DB('db.json')
+# get_sub_category = test.delete_start(45454545)
+# print(get_sub_category)
