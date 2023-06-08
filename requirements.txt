@@ -1,0 +1,4 @@
+python-telegram-bot == 13.15.0
+tinydb == 4.5.1
+requests
+flask
