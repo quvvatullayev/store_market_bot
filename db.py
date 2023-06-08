@@ -15,27 +15,29 @@ class DB:
         self.categories = self.db.table('categories')
         self.sub_categories = self.db.table('sub_categories')
 
-    def get_start(self):
+    def get_start(self, chat_id):
         request = requests.get(base_url + 'start/')
         data = request.json()
         for category in data['result']:
-            self.categories.insert({'id': category['id'], 'name': category['name'], 'image': category['image']})
+            self.categories.insert({'id': category['id'], 'name': category['name'], 'image': category['image'], "chat_id":chat_id})
             for sub_category in category['sub_category']:
-                self.sub_categories.insert(Document({'id': sub_category['id'], 'name': sub_category['name'], 'image': sub_category['image'], 'category': category['id']}, doc_id=sub_category['id']))
+                self.sub_categories.insert(Document({'id': sub_category['id'], 'name': sub_category['name'], 'image': sub_category['image'], 'category': category['id'], "chat_id":chat_id}, doc_id=sub_category['id']))
                 for product in sub_category['products']:
-                    self.products.insert(Document({'id': product['id'], 'name': product['name'], 'image': product['image'], 'price': product['price'], 'sub_category': sub_category['id'], 'category':category['id']}, doc_id=product['id']))
+                    self.products.insert(Document({'id': product['id'], 'name': product['name'], 'image': product['image'], 'price': product['price'], 'sub_category': sub_category['id'], 'category':category['id'], "chat_id":chat_id}, doc_id=product['id']))
         return data
            
-    def get_categories(self):
-        categories = self.categories.all()
+    def get_categories(self, chat_id):
+        categories = self.categories.search(Query().chat_id == chat_id)
         return categories
     
-    def get_sub_categories(self, categories_id):
-        data = self.sub_categories.search(Query().category == categories_id)
+    def get_sub_categories(self, categories_id, chat_id):
+        User = Query()
+        data = self.sub_categories.search((User.category == categories_id) & (User.chat_id == chat_id))
         return data
     
-    def get_product(self, sub_categories_id):
-        data = self.products.search(Query().sub_category == sub_categories_id)
+    def get_product(self, sub_categories_id, chat_id):
+        User = Query()
+        data = self.products.search((User.sub_category == sub_categories_id) & (User.chat_id == chat_id))
         return data
 
     def get_products(self, category_id):
@@ -77,6 +79,6 @@ class DB:
         cart = requests.post(base_url + 'add-cart/', data=cart_data)
         return cart
 
-# test = DB('db.json')
-# get_sub_category = test.get_product(5)
-# print(get_sub_category)
+test = DB('db.json')
+get_sub_category = test.get_product(5,45454545)
+print(get_sub_category)
