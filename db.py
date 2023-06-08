@@ -16,6 +16,7 @@ class DB:
         self.sub_categories = self.db.table('sub_categories')
 
     def get_start(self, chat_id):
+        self.delete_start(chat_id=chat_id)
         request = requests.get(base_url + 'start/')
         data = request.json()
         for category in data['result']:
@@ -54,7 +55,6 @@ class DB:
 
         for i in data_product:
             self.products.remove(doc_ids=[i['id']])
-        
 
     def get_products(self, category_id):
         products = self.categories
@@ -95,6 +95,6 @@ class DB:
         cart = requests.post(base_url + 'add-cart/', data=cart_data)
         return cart
 
-# test = DB('db.json')
-# get_sub_category = test.delete_start(45454545)
-# print(get_sub_category)
+test = DB('db.json')
+get_sub_category = test.get_start(45454545)
+print(get_sub_category)
