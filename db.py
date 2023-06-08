@@ -13,14 +13,19 @@ class DB:
         self.carts = self.db.table('carts')
         self.products = self.db.table('products')
         self.categories = self.db.table('categories')
+        self.sub_categories = self.db.table('sub_categories')
 
     def get_start(self):
         request = requests.get(base_url + 'start/')
         data = request.json()
-        category_list = []
         for category in data['result']:
-            self.categories.insert(category)
-        return category_list
+            self.categories.insert({'id': category['id'], 'name': category['name'], 'image': category['image']})
+            for sub_category in category['sub_category']:
+                self.sub_categories.insert(Document({'id': sub_category['id'], 'name': sub_category['name'], 'image': sub_category['image'], 'category': category['id']}, doc_id=sub_category['id']))
+                for product in sub_category['products']:
+                    self.products.insert(Document({'id': product['id'], 'name': product['name'], 'image': product['image'], 'price': product['price'], 'sub_category': sub_category['id']}, doc_id=product['id']))
+        return data
+        
     
     def get_categories(self):
         categories = self.categories.all()
@@ -28,6 +33,9 @@ class DB:
         for category in categories:
             data.append({'id': category['id'], 'name': category['name'], 'image': category['image']})
         return data
+    
+    def get_products(self, category_id):
+        products = self.categories
 
     def add_user(self, username, name, chat_id, phone_number=11):
         user_data = {
@@ -66,12 +74,12 @@ class DB:
         return cart
 
 test = DB('db.json')
-# start = test.get_start()
+start = test.get_start()
 # add_user = test.updeate_user(123456)
 # add_user = test.add_user('test', 'test', 123456)
 # add_user = test.add_user('test', 'test', 123456)
 # get_user = test.get_user(123456)
 # delete_user = test.delete_user(123456)
 # add_cart = test.add_cart(2342, 1, 1)
-get_categories = test.get_categories()
-print(get_categories)
+# get_categories = test.get_categories()
+# print(get_categories)

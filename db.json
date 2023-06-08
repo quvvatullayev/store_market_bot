@@ -1,0 +1,69 @@
+{
+    "categories": {
+        "1": {
+            "id": 1,
+            "name": "erkaklar fo'dbolkasi",
+            "image": "/category/Screenshot_from_2023-06-07_19-04-13.png"
+        },
+        "2": {
+            "id": 2,
+            "name": "ayollay kyimlari",
+            "image": "/category/Screenshot_from_2023-06-07_19-04-13_Fwr0Rwo.png"
+        }
+    },
+    "sub_categories": {
+        "1": {
+            "id": 1,
+            "name": "kastum shim",
+            "image": "/sub_category/Screenshot_from_2023-06-07_19-04-13.png",
+            "category": 1
+        },
+        "3": {
+            "id": 3,
+            "name": "ko'ylaklar",
+            "image": "/sub_category/Screenshot_from_2023-06-07_19-04-13_9ZETUgT.png",
+            "category": 1
+        },
+        "4": {
+            "id": 4,
+            "name": "ayollar sumkasi",
+            "image": "/sub_category/newpython.png",
+            "category": 2
+        },
+        "5": {
+            "id": 5,
+            "name": "ayollar kyimi",
+            "image": "/sub_category/Screenshot_from_2023-06-07_16-21-20.png",
+            "category": 2
+        },
+        "6": {
+            "id": 6,
+            "name": "ayol byuk 111",
+            "image": "/sub_category/Screenshot_from_2023-06-07_16-21-20_UddTF5r.png",
+            "category": 2
+        }
+    },
+    "products": {
+        "1": {
+            "id": 1,
+            "name": "etaliyan kastumi",
+            "image": "/product/Screenshot_from_2023-06-07_19-04-13.png",
+            "price": 54546,
+            "sub_category": 1
+        },
+        "2": {
+            "id": 2,
+            "name": "turitski",
+            "image": "/product/Screenshot_from_2023-06-07_19-04-13_OabqWS1.png",
+            "price": 654613,
+            "sub_category": 1
+        },
+        "3": {
+            "id": 3,
+            "name": "ayol byuk",
+            "image": "/product/tinydbnew.png",
+            "price": 3452,
+            "sub_category": 5
+        }
+    }
+}
