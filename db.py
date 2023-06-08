@@ -33,10 +33,19 @@ class DB:
         }
         user = requests.post(base_url + 'update-user/', data=user_data)
         return user.json()
+    
+    def get_user(self, chat_id):
+        user = requests.get(base_url + 'get-user/{}/'.format(chat_id))
+        return user.json()
 
+    def delete_user(self, chat_id):
+        user = requests.post(base_url + 'delete-user/{}/'.format(chat_id))
+        return user.json()
 
 test = DB('db.json')
 # start = test.get_start()
-add_user = test.updeate_user(123456)
-
-print(add_user)
+# add_user = test.updeate_user(123456)
+# add_user = test.add_user('test', 'test', 123456)
+# add_user = test.add_user('test', 'test', 123456)
+# get_user = test.get_user(123456)
+# delete_user = test.delete_user(123456)
