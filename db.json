@@ -81,5 +81,12 @@
             "category": 2,
             "chat_id": 677038439
         }
+    },
+    "carts": {
+        "1": {
+            "chat_id": 677038439,
+            "product_id": 1,
+            "count": 10
+        }
     }
 }

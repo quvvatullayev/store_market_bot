@@ -106,13 +106,16 @@ class DB:
         return user.json()
     
     def add_cart(self, chat_id, product_id, count):
-        cart_data = {
-            'chat_id': chat_id,
-            'product': product_id,
-            'count': count
-        }
-        cart = requests.post(base_url + 'add-cart/', data=cart_data)
-        return cart
+        self.carts.insert({'chat_id': chat_id, 'product_id': product_id, 'count': count})
+        return True
+    def get_count_cart(self, chat_id):
+        User = Query()
+        data = self.carts.search((User.chat_id == chat_id) & (User.count == 0))
+        return data
+    def update_cart(self, chat_id, count):
+        User = Query()
+        data = self.carts.update({'count': count}, (User.chat_id == chat_id) & (User.count == 0))
+        return data
 
 # test = DB('db.json')
 # get_sub_category = test.get_start(chat_id=1)

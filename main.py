@@ -145,4 +145,36 @@ class Shop:
         reply_markup = InlineKeyboardMarkup(inline_keyboard)
 
         query.bot.send_photo(chat_id=chat_id, photo=image, caption=caption, reply_markup=reply_markup)
+
+    def add_cart(self, update: Update, context: CallbackContext):
+        query = update.callback_query
+        data = query.data.split('_')
+        product_id = int(data[-1])
+        chat_id = query.message.chat_id
+        sub_category_id = int(data[-2])
+
+
+        query.bot.edit_message_reply_markup(reply_markup=None, chat_id=chat_id, message_id=query.message.message_id)
+
+        db.add_cart(chat_id=chat_id, product_id=product_id, count=0)
+
+        text = "Bu mahsulotdan nechta olasiz❔\n\n"
+        text += 'Sonini kriting masalan:\n\n'
+        text += 'soni:100'
+
+        query.bot.send_message(chat_id=chat_id, text=text)
     
+    def count_cart(self, update: Update, context: CallbackContext):
+        bot = context.bot
+        chat_id = update.message.chat_id
+        count = update.message.text
+
+        coun_data = db.get_count_cart(chat_id=chat_id)
+        if len(coun_data) == 0:
+            pass
+        else:
+            db.update_cart(chat_id=chat_id, count=int(count))
+
+            text = 'Mahsulot savatga qo\'shildi\n\n'
+            text += '📦 katalog'
+            bot.send_message(chat_id=chat_id, text=text)

@@ -14,6 +14,8 @@ dispatcher.add_handler(CallbackQueryHandler(shop.sub_categories, pattern='katalo
 dispatcher.add_handler(CallbackQueryHandler(shop.products, pattern='sub_category_'))
 dispatcher.add_handler(CallbackQueryHandler(shop.next_product, pattern='next_'))
 dispatcher.add_handler(CallbackQueryHandler(shop.back_product, pattern='backe_'))
+dispatcher.add_handler(CallbackQueryHandler(shop.add_cart, pattern='add_cart_'))
+dispatcher.add_handler(MessageHandler(Filters.text, shop.count_cart))
 
 updater.start_polling()
 updater.idle()
