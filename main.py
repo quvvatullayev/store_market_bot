@@ -80,13 +80,69 @@ class Shop:
             caption = f"📦 Nomi: {name}\n💰 Narxi: {price}\n📝 Ta'rif: {discription}"
             inline_keyboard = [
                 [
-                    InlineKeyboardButton('⬅️ Orqaga', callback_data=f"sub_category_{sub_category_id}"),
-                    InlineKeyboardButton('🛒 Savatga qo\'shish', callback_data=f"add_cart_{product['id']}"),
-                    InlineKeyboardButton('➡️ Oldinga', callback_data=f"next_{product['id']}"),
+                    InlineKeyboardButton('⬅️ Orqaga', callback_data=f"backe_{sub_category_id}_{product['id']}"),
+                    InlineKeyboardButton('🛒 Savatga qo\'shish', callback_data=f"add_cart_{sub_category_id}_{product['id']}"),
+                    InlineKeyboardButton('➡️ Oldinga', callback_data=f"next_{sub_category_id}_{product['id']}"),
                 ]
             ]
             reply_markup = InlineKeyboardMarkup(inline_keyboard)
 
             query.bot.send_photo(chat_id=chat_id, photo=image, caption=caption, reply_markup=reply_markup)
+            break
 
+    def next_product(self, update: Update, context: CallbackContext):
+        query = update.callback_query
+        data = query.data.split('_')
+        product_id = int(data[-1])
+        chat_id = query.message.chat_id
+        sub_category_id = int(data[-2])
 
+        query.bot.edit_message_reply_markup(reply_markup=None, chat_id=chat_id, message_id=query.message.message_id)
+
+        product = db.get_next_product(product_id=product_id, chat_id=chat_id, sub_category_id=sub_category_id)[0]
+
+        image = base_url + product['image']
+        name = product['name']
+        price = product['price']
+        discription = product['discription']
+        
+        caption = f"📦 Nomi: {name}\n💰 Narxi: {price}\n📝 Ta'rif: {discription}"
+        inline_keyboard = [
+            [
+                InlineKeyboardButton('⬅️ Orqaga', callback_data=f"backe_{sub_category_id}_{product['id']}"),
+                InlineKeyboardButton('🛒 Savatga qo\'shish', callback_data=f"add_cart_{sub_category_id}_{product['id']}"),
+                InlineKeyboardButton('➡️ Oldinga', callback_data=f"next_{sub_category_id}_{product['id']}"),
+            ]
+        ]
+        reply_markup = InlineKeyboardMarkup(inline_keyboard)
+
+        query.bot.send_photo(chat_id=chat_id, photo=image, caption=caption, reply_markup=reply_markup)
+
+    def back_product(self, update: Update, context: CallbackContext):
+        query = update.callback_query
+        data = query.data.split('_')
+        product_id = int(data[-1])
+        chat_id = query.message.chat_id
+        sub_category_id = int(data[-2])
+
+        query.bot.edit_message_reply_markup(reply_markup=None, chat_id=chat_id, message_id=query.message.message_id)
+
+        product = db.get_back_product(product_id=product_id, chat_id=chat_id, sub_category_id=sub_category_id)[0]
+
+        image = base_url + product['image']
+        name = product['name']
+        price = product['price']
+        discription = product['discription']
+
+        caption = f"📦 Nomi: {name}\n💰 Narxi: {price}\n📝 Ta'rif: {discription}"
+        inline_keyboard = [
+            [
+                InlineKeyboardButton('⬅️ Orqaga', callback_data=f"backe_{sub_category_id}_{product['id']}"),
+                InlineKeyboardButton('🛒 Savatga qo\'shish', callback_data=f"add_cart_{sub_category_id}_{product['id']}"),
+                InlineKeyboardButton('➡️ Oldinga', callback_data=f"next_{sub_category_id}_{product['id']}"),
+            ]
+        ]
+        reply_markup = InlineKeyboardMarkup(inline_keyboard)
+
+        query.bot.send_photo(chat_id=chat_id, photo=image, caption=caption, reply_markup=reply_markup)
+    
