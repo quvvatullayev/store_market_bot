@@ -42,6 +42,11 @@ class DB:
         data = self.products.search((User.sub_category == sub_categories_id) & (User.chat_id == chat_id))
         return data
     
+    def get_product_by_id(self, product_id, chat_id):
+        User = Query()
+        data = self.products.search((User.id == product_id) & (User.chat_id == chat_id))
+        return data
+    
     def delete_start(self, chat_id):
         chat_id = int(chat_id)
         User = Query()
@@ -116,6 +121,17 @@ class DB:
         User = Query()
         data = self.carts.update({'count': count}, (User.chat_id == chat_id) & (User.count == 0))
         return data
+
+    def get_cart(self, chat_id):
+        User = Query()
+        data = self.carts.search((User.chat_id == chat_id) & (User.count > 0))
+        return data
+    
+    def delete_cart(self, chat_id):
+        User = Query()
+        data = self.carts.remove((User.chat_id == chat_id) & (User.count > 0))
+        return data
+    
 
 # test = DB('db.json')
 # get_sub_category = test.get_start(chat_id=1)

@@ -178,3 +178,43 @@ class Shop:
             text = 'Mahsulot savatga qo\'shildi\n\n'
             text += '📦 katalog'
             bot.send_message(chat_id=chat_id, text=text)
+
+    def cart(self, update: Update, context: CallbackContext):
+        bot = context.bot
+        chat_id = update.message.chat_id
+
+        data_cart = db.get_cart(chat_id=chat_id)
+
+        if len(data_cart) == 0:
+            text = 'Savat bo\'sh\n\n'
+            text += '📦 katalog'
+            bot.send_message(chat_id=chat_id, text=text)
+            return True
+        else:
+            text = 'Savatdagi mahsulotlar:\n\n'
+            for cart in data_cart:
+                product = db.get_product_by_id(product_id=cart['product_id'], chat_id=chat_id)[0]
+                text += f"📦 Nomi: {product['name']}\n💰 Narxi: {product['price']} so'm\n📝 Ta'rif: {product['discription']}\n🧮 Mahsulot soni: {cart['count']}\n\n"
+
+            inline_keyboard = [
+                [
+                    InlineKeyboardButton('📝 Buyurtma', callback_data=f"order_{chat_id}"),
+                    InlineKeyboardButton('🔄 Yangilash', callback_data=f"refresh_{chat_id}"),
+                    InlineKeyboardButton('🗑 Tozalash', callback_data=f"clear_cart_{chat_id}"),
+                ]
+            ]
+
+            reply_markup = InlineKeyboardMarkup(inline_keyboard)
+            bot.send_message(chat_id=chat_id, text=text, reply_markup=reply_markup)
+
+    def clear_cart(self, update: Update, context: CallbackContext):
+        query = update.callback_query
+        chat_id = query.message.chat_id
+
+        db.delete_cart(chat_id=chat_id)
+
+        query.bot.edit_message_reply_markup(reply_markup=None, chat_id=chat_id, message_id=query.message.message_id)
+
+        text = 'Savat tozalandi\n\n'
+        text += '📦 katalog'
+        query.bot.send_message(chat_id=chat_id, text=text)
