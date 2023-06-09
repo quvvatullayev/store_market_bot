@@ -24,7 +24,7 @@ class DB:
             for sub_category in category['sub_category']:
                 self.sub_categories.insert({'id': sub_category['id'], 'name': sub_category['name'], 'image': sub_category['image'], 'category': category['id'], "chat_id":int(chat_id)})
                 for product in sub_category['products']:
-                    self.products.insert({'id': product['id'], 'name': product['name'], 'image': product['image'], 'price': product['price'], 'sub_category': sub_category['id'], 'category':category['id'], "chat_id":int(chat_id)})
+                    self.products.insert({'id': product['id'], 'name': product['name'],'discription': product['discription'], 'image': product['image'], 'price': product['price'], 'sub_category': sub_category['id'], 'category':category['id'], "chat_id":int(chat_id)})
         return data
            
     def get_categories(self, chat_id):
@@ -58,8 +58,10 @@ class DB:
         for i in data_product:
             self.products.remove(User.chat_id == chat_id)
 
-    def get_products(self, category_id):
-        products = self.categories
+    def get_products(self, sub_category_id, chat_id):
+        User = Query()
+        data = self.products.search((User.sub_category == sub_category_id) & (User.chat_id == chat_id))
+        return data
 
     def add_user(self, username, name, chat_id, phone_number=11):
         user_data = {
@@ -98,5 +100,5 @@ class DB:
         return cart
 
 # test = DB('db.json')
-# get_sub_category = test.get_start('677038439')
+# get_sub_category = test.get_start(chat_id=1)
 # print(get_sub_category)
