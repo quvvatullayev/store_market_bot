@@ -32,16 +32,32 @@ class Shop:
         chat_id = update.message.chat_id
 
         db.get_start(chat_id=str(chat_id))
-        katalogs = db.get_categories(chat_id=str(chat_id))
+        katalogs = db.get_categories(chat_id=chat_id)
 
         inline_keyboard = []
         
         for katalog in katalogs:
-            if len(inline_keyboard) == 0 or len(inline_keyboard[-1]) == 0:
-                inline_keyboard.append([InlineKeyboardButton(katalog['name'], callback_data=f"katalog_{katalog['id']}")])
-            if len(inline_keyboard[-1]) == 1:
-                inline_keyboard[-1].append(InlineKeyboardButton(katalog['name'], callback_data=f"katalog_{katalog['id']}"))
+            inline_keyboard.append([InlineKeyboardButton(katalog['name'], callback_data=f"katalog_{katalog['id']}")])
          
         text = 'Kataloglarni tanlang'
         reply_markup = InlineKeyboardMarkup(inline_keyboard)
         bot.send_message(chat_id, text, reply_markup=reply_markup)
+
+    def sub_categories(self, update: Update, context: CallbackContext):
+        query = update.callback_query
+        chat_id = query.message.chat_id
+
+        data = query.data.split('_')
+        katalog_id = int(data[-1])
+
+        data_sub_categories = db.get_sub_categories(chat_id=chat_id, categories_id=katalog_id)
+
+        inline_keyboard = []
+        for sub_category in data_sub_categories:
+            inline_keyboard.append([InlineKeyboardButton(sub_category['name'], callback_data=f"sub_category_{sub_category['id']}")])
+        
+        text = 'Kategoriya tanlang'
+        reply_markup = InlineKeyboardMarkup(inline_keyboard)
+        query.edit_message_text(text=text, reply_markup=reply_markup)
+
+        
