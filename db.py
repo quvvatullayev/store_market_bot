@@ -1,6 +1,6 @@
 import requests
 import json
-from tinydb import TinyDB, Query
+from tinydb import TinyDB, Query,where
 from tinydb.database import Document
 from pprint import pprint
 
@@ -22,9 +22,9 @@ class DB:
         for category in data['result']:
             self.categories.insert({'id': category['id'], 'name': category['name'], 'image': category['image'], "chat_id":chat_id})
             for sub_category in category['sub_category']:
-                self.sub_categories.insert(Document({'id': sub_category['id'], 'name': sub_category['name'], 'image': sub_category['image'], 'category': category['id'], "chat_id":chat_id}, doc_id=sub_category['id']))
+                self.sub_categories.insert({'id': sub_category['id'], 'name': sub_category['name'], 'image': sub_category['image'], 'category': category['id'], "chat_id":chat_id})
                 for product in sub_category['products']:
-                    self.products.insert(Document({'id': product['id'], 'name': product['name'], 'image': product['image'], 'price': product['price'], 'sub_category': sub_category['id'], 'category':category['id'], "chat_id":chat_id}, doc_id=product['id']))
+                    self.products.insert({'id': product['id'], 'name': product['name'], 'image': product['image'], 'price': product['price'], 'sub_category': sub_category['id'], 'category':category['id'], "chat_id":chat_id})
         return data
            
     def get_categories(self, chat_id):
@@ -48,13 +48,13 @@ class DB:
         data_product = self.products.search(User.chat_id == chat_id)
 
         for i in data_categories:
-            self.categories.remove(doc_ids=[i['id']])
+            self.categories.remove(User.chat_id == chat_id)
 
         for i in data_sub_categories:
-            self.sub_categories.remove(doc_ids=[i['id']])
+            self.sub_categories.remove(User.chat_id == chat_id)
 
         for i in data_product:
-            self.products.remove(doc_ids=[i['id']])
+            self.products.remove(User.chat_id == chat_id)
 
     def get_products(self, category_id):
         products = self.categories
@@ -95,6 +95,6 @@ class DB:
         cart = requests.post(base_url + 'add-cart/', data=cart_data)
         return cart
 
-test = DB('db.json')
-get_sub_category = test.get_start(45454545)
-print(get_sub_category)
+# test = DB('db.json')
+# get_sub_category = test.get_start('677038439')
+# print(get_sub_category)

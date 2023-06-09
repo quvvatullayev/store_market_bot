@@ -4,13 +4,13 @@
             "id": 1,
             "name": "erkaklar fo'dbolkasi",
             "image": "/category/Screenshot_from_2023-06-07_19-04-13.png",
-            "chat_id": 45454545
+            "chat_id": "677038439"
         },
         "2": {
             "id": 2,
             "name": "ayollay kyimlari",
             "image": "/category/Screenshot_from_2023-06-07_19-04-13_Fwr0Rwo.png",
-            "chat_id": 45454545
+            "chat_id": "677038439"
         }
     },
     "sub_categories": {
@@ -19,35 +19,35 @@
             "name": "kastum shim",
             "image": "/sub_category/Screenshot_from_2023-06-07_19-04-13.png",
             "category": 1,
-            "chat_id": 45454545
+            "chat_id": "677038439"
         },
-        "3": {
+        "2": {
             "id": 3,
             "name": "ko'ylaklar",
             "image": "/sub_category/Screenshot_from_2023-06-07_19-04-13_9ZETUgT.png",
             "category": 1,
-            "chat_id": 45454545
+            "chat_id": "677038439"
         },
-        "4": {
+        "3": {
             "id": 4,
             "name": "ayollar sumkasi",
             "image": "/sub_category/newpython.png",
             "category": 2,
-            "chat_id": 45454545
+            "chat_id": "677038439"
         },
-        "5": {
+        "4": {
             "id": 5,
             "name": "ayollar kyimi",
             "image": "/sub_category/Screenshot_from_2023-06-07_16-21-20.png",
             "category": 2,
-            "chat_id": 45454545
+            "chat_id": "677038439"
         },
-        "6": {
+        "5": {
             "id": 6,
             "name": "ayol byuk 111",
             "image": "/sub_category/Screenshot_from_2023-06-07_16-21-20_UddTF5r.png",
             "category": 2,
-            "chat_id": 45454545
+            "chat_id": "677038439"
         }
     },
     "products": {
@@ -58,7 +58,7 @@
             "price": 54546,
             "sub_category": 1,
             "category": 1,
-            "chat_id": 45454545
+            "chat_id": "677038439"
         },
         "2": {
             "id": 2,
@@ -67,7 +67,7 @@
             "price": 654613,
             "sub_category": 1,
             "category": 1,
-            "chat_id": 45454545
+            "chat_id": "677038439"
         },
         "3": {
             "id": 3,
@@ -76,7 +76,7 @@
             "price": 3452,
             "sub_category": 5,
             "category": 2,
-            "chat_id": 45454545
+            "chat_id": "677038439"
         }
     }
 }
