@@ -199,8 +199,8 @@ class Shop:
         data_cart = db.get_cart(chat_id=chat_id)
 
         if len(data_cart) == 0:
-            text = 'Savat bo\'sh\n\n'
-            text += '📦 katalog'
+            text = '📭 Savat bo\'sh\n\n'
+            
             bot.send_message(chat_id=chat_id, text=text)
             return True
         else:
@@ -228,8 +228,7 @@ class Shop:
 
         query.bot.edit_message_reply_markup(reply_markup=None, chat_id=chat_id, message_id=query.message.message_id)
 
-        text = 'Savat tozalandi\n\n'
-        text += '📦 katalog'
+        text = '🧹 Savat tozalandi\n\n'
         query.bot.send_message(chat_id=chat_id, text=text)
 
     def order(self, update: Update, context: CallbackContext):
@@ -239,12 +238,12 @@ class Shop:
             get_user = db.get_user(chat_id=chat_id)
 
             if get_user['status'] == False:
-                text = 'Iltimos avval ro\'yxatdan o\'ting\n\n'
+                text = 'Iltimos avval ro\'yxatdan o\'ting❗️\n\n'
                 query.bot.send_message(chat_id=chat_id, text=text)
 
             else:
                 query.bot.edit_message_reply_markup(reply_markup=None, chat_id=chat_id, message_id=query.message.message_id)
-                text = 'Buyurtma qilish uchun locatsiyangizni yuboring\n\n'
+                text = '📍 Buyurtma qilish uchun locatsiyangizni yuboring\n\n'
                 reply_markup = ReplyKeyboardMarkup([[KeyboardButton('📍 Locatsiyani yuborish', request_location=True)]], resize_keyboard=True)
                 query.bot.send_message(chat_id=chat_id, text=text, reply_markup=reply_markup)
                 
@@ -258,7 +257,7 @@ class Shop:
         bot = context.bot
         chat_id = update.message.chat_id
 
-        text = 'Iltimos telefon raqamingizni kiriting\n\n'
+        text = '📞 Iltimos telefon raqamingizni kiriting\n\n'
 
         reply_markup = ReplyKeyboardMarkup([[KeyboardButton('📞 Telefon raqamni yuborish', request_contact=True)]], resize_keyboard=True)
         bot.send_message(chat_id=chat_id, text=text, reply_markup=reply_markup)
@@ -275,12 +274,12 @@ class Shop:
 
         if user['status']:
             text = 'Siz muvaffaqiyatli ro\'yxatdan o\'tdingiz\n\n'
-            text += '📦 katalog'
+            text += '✅ Buyurtma berishingiz mumkin\n\n'
             bot.send_message(chat_id=chat_id, text=text)
             self.start(update=update, context=context)
         else:
             text = 'Siz allaqachon ro\'yxatdan o\'tgansiz\n\n'
-            text += '📦 katalog'
+            text += '✅ Buyurtma berishingiz mumkin\n\n'
             bot.send_message(chat_id=chat_id, text=text)
             self.start(update=update, context=context)
         
@@ -304,6 +303,13 @@ class Shop:
         db.add_order(order_list=order_list)
 
         text = '✅Buyurtmangiz qabul qilindi\n\n'
-        text += '📦 katalog'
+        text += '✅ Buyurtmangizni qabul qilish uchun operator siz bilan bog\'lanadi\n\n'
+        db.delete_cart(chat_id=chat_id)
         bot.send_message(chat_id=chat_id, text=text)
+        self.start(update=update, context=context)
+
+    def refresh(self, update: Update, context: CallbackContext):
+        query = update.callback_query
+        chat_id = query.message.chat_id
+        query.bot.edit_message_reply_markup(reply_markup=None, chat_id=chat_id, message_id=query.message.message_id)
         self.start(update=update, context=context)
