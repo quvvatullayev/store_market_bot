@@ -145,17 +145,10 @@ class DB:
         data = self.carts.remove((User.chat_id == chat_id) & (User.count > 0))
         return data
     
-    def add_order(self, chat_id):
-        user = requests.get(base_url + 'get-user/{}/'.format(chat_id)) 
-        user_data = user.json()
-        print(user_data)
-        # order_data = {
-        #     'chat_id': chat_id,
-        #     'address': address,
-        #     'comment': comment
-        # }
-        # order = requests.post(base_url + 'add-order/', data=order_data)
-        # return order.json()
+    def add_order(self, order_list):
+        for order in order_list:
+            print(requests.post(base_url + 'add-order/', data=order).json())
+        return True
 
 # test = DB('db.json')
 # get_sub_category = test.get_start(chat_id=1)

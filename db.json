@@ -11,6 +11,30 @@
             "name": "ayollay kyimlari",
             "image": "/category/Screenshot_from_2023-06-07_19-04-13_Fwr0Rwo.png",
             "chat_id": 677038439
+        },
+        "5": {
+            "id": 1,
+            "name": "erkaklar fo'dbolkasi",
+            "image": "/category/Screenshot_from_2023-06-07_19-04-13.png",
+            "chat_id": 1525065098
+        },
+        "6": {
+            "id": 2,
+            "name": "ayollay kyimlari",
+            "image": "/category/Screenshot_from_2023-06-07_19-04-13_Fwr0Rwo.png",
+            "chat_id": 1525065098
+        },
+        "9": {
+            "id": 1,
+            "name": "erkaklar fo'dbolkasi",
+            "image": "/category/Screenshot_from_2023-06-07_19-04-13.png",
+            "chat_id": 5503011861
+        },
+        "10": {
+            "id": 2,
+            "name": "ayollay kyimlari",
+            "image": "/category/Screenshot_from_2023-06-07_19-04-13_Fwr0Rwo.png",
+            "chat_id": 5503011861
         }
     },
     "sub_categories": {
@@ -48,6 +72,76 @@
             "image": "/sub_category/Screenshot_from_2023-06-07_16-21-20_UddTF5r.png",
             "category": 2,
             "chat_id": 677038439
+        },
+        "11": {
+            "id": 1,
+            "name": "kastum shim",
+            "image": "/sub_category/Screenshot_from_2023-06-07_19-04-13.png",
+            "category": 1,
+            "chat_id": 1525065098
+        },
+        "12": {
+            "id": 3,
+            "name": "ko'ylaklar",
+            "image": "/sub_category/Screenshot_from_2023-06-07_19-04-13_9ZETUgT.png",
+            "category": 1,
+            "chat_id": 1525065098
+        },
+        "13": {
+            "id": 4,
+            "name": "ayollar sumkasi",
+            "image": "/sub_category/newpython.png",
+            "category": 2,
+            "chat_id": 1525065098
+        },
+        "14": {
+            "id": 5,
+            "name": "ayollar kyimi",
+            "image": "/sub_category/Screenshot_from_2023-06-07_16-21-20.png",
+            "category": 2,
+            "chat_id": 1525065098
+        },
+        "15": {
+            "id": 6,
+            "name": "ayol byuk 111",
+            "image": "/sub_category/Screenshot_from_2023-06-07_16-21-20_UddTF5r.png",
+            "category": 2,
+            "chat_id": 1525065098
+        },
+        "21": {
+            "id": 1,
+            "name": "kastum shim",
+            "image": "/sub_category/Screenshot_from_2023-06-07_19-04-13.png",
+            "category": 1,
+            "chat_id": 5503011861
+        },
+        "22": {
+            "id": 3,
+            "name": "ko'ylaklar",
+            "image": "/sub_category/Screenshot_from_2023-06-07_19-04-13_9ZETUgT.png",
+            "category": 1,
+            "chat_id": 5503011861
+        },
+        "23": {
+            "id": 4,
+            "name": "ayollar sumkasi",
+            "image": "/sub_category/newpython.png",
+            "category": 2,
+            "chat_id": 5503011861
+        },
+        "24": {
+            "id": 5,
+            "name": "ayollar kyimi",
+            "image": "/sub_category/Screenshot_from_2023-06-07_16-21-20.png",
+            "category": 2,
+            "chat_id": 5503011861
+        },
+        "25": {
+            "id": 6,
+            "name": "ayol byuk 111",
+            "image": "/sub_category/Screenshot_from_2023-06-07_16-21-20_UddTF5r.png",
+            "category": 2,
+            "chat_id": 5503011861
         }
     },
     "products": {
@@ -80,6 +174,66 @@
             "sub_category": 5,
             "category": 2,
             "chat_id": 677038439
+        },
+        "7": {
+            "id": 1,
+            "name": "etaliyan kastumi",
+            "discription": "asfd a",
+            "image": "/product/Screenshot_from_2023-06-07_19-04-13.png",
+            "price": 54546,
+            "sub_category": 1,
+            "category": 1,
+            "chat_id": 1525065098
+        },
+        "8": {
+            "id": 2,
+            "name": "turitski",
+            "discription": "alksjfljafsd l;kjasdlfkj",
+            "image": "/product/Screenshot_from_2023-06-07_19-04-13_OabqWS1.png",
+            "price": 654613,
+            "sub_category": 1,
+            "category": 1,
+            "chat_id": 1525065098
+        },
+        "9": {
+            "id": 3,
+            "name": "ayol byuk",
+            "discription": "vxzlkjcv",
+            "image": "/product/tinydbnew.png",
+            "price": 3452,
+            "sub_category": 5,
+            "category": 2,
+            "chat_id": 1525065098
+        },
+        "13": {
+            "id": 1,
+            "name": "etaliyan kastumi",
+            "discription": "asfd a",
+            "image": "/product/Screenshot_from_2023-06-07_19-04-13.png",
+            "price": 54546,
+            "sub_category": 1,
+            "category": 1,
+            "chat_id": 5503011861
+        },
+        "14": {
+            "id": 2,
+            "name": "turitski",
+            "discription": "alksjfljafsd l;kjasdlfkj",
+            "image": "/product/Screenshot_from_2023-06-07_19-04-13_OabqWS1.png",
+            "price": 654613,
+            "sub_category": 1,
+            "category": 1,
+            "chat_id": 5503011861
+        },
+        "15": {
+            "id": 3,
+            "name": "ayol byuk",
+            "discription": "vxzlkjcv",
+            "image": "/product/tinydbnew.png",
+            "price": 3452,
+            "sub_category": 5,
+            "category": 2,
+            "chat_id": 5503011861
         }
     },
     "carts": {
@@ -96,6 +250,13 @@
             "count": 4,
             "phone": "+998942810320",
             "user": 11
+        },
+        "3": {
+            "chat_id": 5503011861,
+            "product": 1,
+            "count": 78,
+            "phone": "+998976697277",
+            "user": 12
         }
     }
 }

@@ -152,22 +152,30 @@ class Shop:
         data = query.data.split('_')
         product_id = int(data[-1])
         chat_id = query.message.chat_id
-        sub_category_id = int(data[-2])
 
-        get_user = db.get_user(chat_id=chat_id)
+        try:
+            get_user = db.get_user(chat_id=chat_id)
 
-        user_id = get_user['data']['id']
-        phone = get_user['data']['phone']
+            user_id = get_user['data']['id']
+            phone = get_user['data']['phone']
 
-        query.bot.edit_message_reply_markup(reply_markup=None, chat_id=chat_id, message_id=query.message.message_id)
+            query.bot.edit_message_reply_markup(reply_markup=None, chat_id=chat_id, message_id=query.message.message_id)
 
-        db.add_cart(chat_id=chat_id, product_id=product_id, count=0, phone=phone, user_id=user_id)
+            db.add_cart(chat_id=chat_id, product_id=product_id, count=0, phone=phone, user_id=user_id)
 
-        text = "Bu mahsulotdan nechta olasiz❔\n\n"
-        text += 'Sonini kriting masalan:\n\n'
-        text += 'soni:100'
+            text = "Bu mahsulotdan nechta olasiz❔\n\n"
+            text += 'Sonini kriting masalan:\n\n'
+            text += 'soni:100'
 
-        query.bot.send_message(chat_id=chat_id, text=text)
+            query.bot.send_message(chat_id=chat_id, text=text)
+        
+        except:
+            query.bot.edit_message_reply_markup(reply_markup=None, chat_id=chat_id, message_id=query.message.message_id)
+
+            text = "Iltimos avval ro'yxatdan o'ting\n\n"
+            text += "🔐 ro'yxatdan o'tish tubmasini bosing"
+
+            query.bot.send_message(chat_id=chat_id, text=text)
     
     def count_cart(self, update: Update, context: CallbackContext):
         bot = context.bot
@@ -235,7 +243,7 @@ class Shop:
                 query.bot.send_message(chat_id=chat_id, text=text)
 
             else:
-                cart_list = db.get_cart_list(chat_id=chat_id)
+                query.bot.edit_message_reply_markup(reply_markup=None, chat_id=chat_id, message_id=query.message.message_id)
                 text = 'Buyurtma qilish uchun locatsiyangizni yuboring\n\n'
                 reply_markup = ReplyKeyboardMarkup([[KeyboardButton('📍 Locatsiyani yuborish', request_location=True)]], resize_keyboard=True)
                 query.bot.send_message(chat_id=chat_id, text=text, reply_markup=reply_markup)
@@ -277,4 +285,25 @@ class Shop:
             self.start(update=update, context=context)
         
     def add_order(self, update: Update, context: CallbackContext):
-        print('hi')
+        bot = context.bot
+        chat_id = update.message.chat_id
+        get_user = db.get_user(chat_id=chat_id)
+        user_id = get_user['data']['id']
+        cart_list = db.get_cart_list(chat_id=chat_id)
+        location = update.message.location
+        bot.send_message(chat_id=chat_id, text='Iltimos kuting ...', reply_markup=None)
+        order_list = []
+        for cart in cart_list:
+            order_list.append({
+                'user': user_id,
+                'product': cart['product'],
+                'count': cart['count'],
+                'phone': cart['phone'],
+                'address': f"{location.latitude},{location.longitude}"
+            })
+        db.add_order(order_list=order_list)
+
+        text = '✅Buyurtmangiz qabul qilindi\n\n'
+        text += '📦 katalog'
+        bot.send_message(chat_id=chat_id, text=text)
+        self.start(update=update, context=context)
