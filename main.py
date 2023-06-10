@@ -246,4 +246,34 @@ class Shop:
             query.edit_message_reply_markup(reply_markup=None)
             text = 'Iltimos avval ro\'yxatdan o\'ting❗️\n\n'
             query.bot.send_message(chat_id=chat_id, text=text)
+
+    def get_login(self, update: Update, context: CallbackContext):
+        bot = context.bot
+        chat_id = update.message.chat_id
+
+        text = 'Iltimos telefon raqamingizni kiriting\n\n'
+
+        reply_markup = ReplyKeyboardMarkup([[KeyboardButton('📞 Telefon raqamni yuborish', request_contact=True)]], resize_keyboard=True)
+        bot.send_message(chat_id=chat_id, text=text, reply_markup=reply_markup)
+
+    def add_user(self, update: Update, context: CallbackContext):
+        bot = context.bot
+        chat_id = update.message.chat_id
+
+        phone_number = update.message.contact.phone_number
+        username = update.message.from_user.username
+        name = update.message.from_user.first_name
+
+        user = db.add_user(username=username, name=name, chat_id=chat_id, phone_number=phone_number)
+
+        if user['status']:
+            text = 'Siz muvaffaqiyatli ro\'yxatdan o\'tdingiz\n\n'
+            text += '📦 katalog'
+            bot.send_message(chat_id=chat_id, text=text)
+            self.start(update=update, context=context)
+        else:
+            text = 'Siz allaqachon ro\'yxatdan o\'tgansiz\n\n'
+            text += '📦 katalog'
+            bot.send_message(chat_id=chat_id, text=text)
+            self.start(update=update, context=context)
         
