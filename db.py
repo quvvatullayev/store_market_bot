@@ -103,17 +103,26 @@ class DB:
         return user.json()
     
     def get_user(self, chat_id):
-        print(base_url+f'get-user/{chat_id}/')
         user = requests.get(base_url+f'get-user/{chat_id}/')
-        return user
+        return user.json()
 
     def delete_user(self, chat_id):
         user = requests.post(base_url + 'delete-user/{}/'.format(chat_id))
         return user.json()
     
-    def add_cart(self, chat_id, product_id, count):
-        self.carts.insert({'chat_id': chat_id, 'product_id': product_id, 'count': count})
-        return True
+    def add_cart(self, chat_id, product_id, count, phone, user_id):
+        cart_data = {
+            'chat_id': chat_id,
+            'product': product_id,
+            'count': count,
+            'phone': phone,
+            'user': user_id
+        }
+        self.carts.insert(cart_data)
+        return cart_data
+        
+
+
     def get_count_cart(self, chat_id):
         User = Query()
         data = self.carts.search((User.chat_id == chat_id) & (User.count == 0))
@@ -126,6 +135,9 @@ class DB:
     def get_cart(self, chat_id):
         User = Query()
         data = self.carts.search((User.chat_id == chat_id) & (User.count > 0))
+        return data
+    def get_cart_list(self, chat_id):
+        data = self.carts.search(Query().chat_id == chat_id)
         return data
     
     def delete_cart(self, chat_id):

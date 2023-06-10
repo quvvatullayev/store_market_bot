@@ -12,7 +12,7 @@ dispatcher.add_handler(CommandHandler('start', shop.start))
 dispatcher.add_handler(MessageHandler(Filters.text('📦 katalog'), shop.katalog))
 dispatcher.add_handler(MessageHandler(Filters.text('🛒 karzinka'), shop.cart))
 dispatcher.add_handler(MessageHandler(Filters.text("🔐 ro'yxatdan o'tish"), shop.get_login))
-# filter phone number
+dispatcher.add_handler(MessageHandler(Filters.location, shop.add_order))
 dispatcher.add_handler(MessageHandler(Filters.contact, shop.add_user))
 dispatcher.add_handler(CallbackQueryHandler(shop.sub_categories, pattern='katalog_'))
 dispatcher.add_handler(CallbackQueryHandler(shop.products, pattern='sub_category_'))

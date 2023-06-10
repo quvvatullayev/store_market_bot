@@ -154,10 +154,14 @@ class Shop:
         chat_id = query.message.chat_id
         sub_category_id = int(data[-2])
 
+        get_user = db.get_user(chat_id=chat_id)
+
+        user_id = get_user['data']['id']
+        phone = get_user['data']['phone']
 
         query.bot.edit_message_reply_markup(reply_markup=None, chat_id=chat_id, message_id=query.message.message_id)
 
-        db.add_cart(chat_id=chat_id, product_id=product_id, count=0)
+        db.add_cart(chat_id=chat_id, product_id=product_id, count=0, phone=phone, user_id=user_id)
 
         text = "Bu mahsulotdan nechta olasiz❔\n\n"
         text += 'Sonini kriting masalan:\n\n'
@@ -194,7 +198,7 @@ class Shop:
         else:
             text = 'Savatdagi mahsulotlar:\n\n'
             for cart in data_cart:
-                product = db.get_product_by_id(product_id=cart['product_id'], chat_id=chat_id)[0]
+                product = db.get_product_by_id(product_id=cart['product'], chat_id=chat_id)[0]
                 text += f"📦 Nomi: {product['name']}\n💰 Narxi: {product['price']} so'm\n📝 Ta'rif: {product['discription']}\n🧮 Mahsulot soni: {cart['count']}\n\n"
 
             inline_keyboard = [
@@ -226,22 +230,17 @@ class Shop:
         try:
             get_user = db.get_user(chat_id=chat_id)
 
-            if get_user['status']:
-                print(get_user)
+            if get_user['status'] == False:
                 text = 'Iltimos avval ro\'yxatdan o\'ting\n\n'
                 query.bot.send_message(chat_id=chat_id, text=text)
 
             else:
-                # db.delete_cart(chat_id=chat_id)
-                # db.add_order(chat_id=chat_id)
+                cart_list = db.get_cart_list(chat_id=chat_id)
+                text = 'Buyurtma qilish uchun locatsiyangizni yuboring\n\n'
+                reply_markup = ReplyKeyboardMarkup([[KeyboardButton('📍 Locatsiyani yuborish', request_location=True)]], resize_keyboard=True)
+                query.bot.send_message(chat_id=chat_id, text=text, reply_markup=reply_markup)
                 
 
-                # query.bot.edit_message_reply_markup(reply_markup=None, chat_id=chat_id, message_id=query.message.message_id)
-
-                # text = 'Buyurtma qabul qilindi\n\n'
-                # text += '📦 katalog'
-                # query.bot.send_message(chat_id=chat_id, text=text)
-                print('ok')
         except:
             query.edit_message_reply_markup(reply_markup=None)
             text = 'Iltimos avval ro\'yxatdan o\'ting❗️\n\n'
@@ -277,3 +276,5 @@ class Shop:
             bot.send_message(chat_id=chat_id, text=text)
             self.start(update=update, context=context)
         
+    def add_order(self, update: Update, context: CallbackContext):
+        print('hi')
