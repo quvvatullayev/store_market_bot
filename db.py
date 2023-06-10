@@ -150,6 +150,12 @@ class DB:
         for order in order_list:
             requests.post(base_url + 'add-order/', data=order).json()
         return True
+    
+    def get_orders(self, chat_id):
+        user = requests.get(base_url+f'get-user/{chat_id}/').json()
+        user_id = user['data']['id']
+        orders = requests.get(base_url+f'get-user-order/{user_id}/')
+        return orders.json()
 
 # test = DB('db.json')
 # get_sub_category = test.get_start(chat_id=1)
