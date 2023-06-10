@@ -48,4 +48,19 @@ class UserClass:
             text = 'Siz allaqachon ro\'yxatdan o\'tgansiz\n\n'
             text += '✅ Buyurtma berishingiz mumkin\n\n'
             bot.send_message(chat_id=chat_id, text=text)
-            shop.start_refresh(update=update, context=context, chat_id=chat_id, first_name=update.message.from_user.first_name)        
+            shop.start_refresh(update=update, context=context, chat_id=chat_id, first_name=update.message.from_user.first_name)
+
+    def profil(self, update: Update, context: CallbackContext):
+        bot = context.bot
+        chat_id = update.message.chat_id
+
+        user = db.get_user(chat_id=chat_id)['data']
+
+
+        text = f'👤 Profil\n\n'
+        text += f'👤 Foydalanuvchi: {user["name"]}\n'
+        text += f'👤 Username: {user["username"]}\n'
+        text += f'📞 Telefon raqam: {user["phone"]}\n\n'
+        
+        reply_markup = ReplyKeyboardMarkup([[KeyboardButton('📝 zakazlarim'), KeyboardButton('🏠 Bosh sahifa')]], resize_keyboard=True)
+        bot.send_message(chat_id=chat_id, text=text, reply_markup=reply_markup)
