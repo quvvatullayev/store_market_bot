@@ -53,6 +53,8 @@ class Katalog:
         query = update.callback_query
         chat_id = query.message.chat_id
 
+        query.bot.edit_message_reply_markup(reply_markup=None, chat_id=chat_id, message_id=query.message.message_id)
+
         data = query.data.split('_')
         sub_category_id = int(data[-1])
 
