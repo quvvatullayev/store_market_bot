@@ -136,6 +136,7 @@ class DB:
         User = Query()
         data = self.carts.search((User.chat_id == chat_id) & (User.count > 0))
         return data
+    
     def get_cart_list(self, chat_id):
         data = self.carts.search(Query().chat_id == chat_id)
         return data
@@ -147,7 +148,7 @@ class DB:
     
     def add_order(self, order_list):
         for order in order_list:
-            print(requests.post(base_url + 'add-order/', data=order).json())
+            requests.post(base_url + 'add-order/', data=order).json()
         return True
 
 # test = DB('db.json')
