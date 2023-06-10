@@ -4,7 +4,7 @@ from tinydb import TinyDB, Query,where
 from tinydb.database import Document
 from pprint import pprint
 
-base_url = 'http://storemarket.pythonanywhere.com/shop/'
+base_url = 'https://storemarket.pythonanywhere.com/shop/'
 
 class DB:
     def __init__(self, path):
@@ -103,8 +103,9 @@ class DB:
         return user.json()
     
     def get_user(self, chat_id):
-        user = requests.get(base_url + 'get-user/{}/'.format(chat_id))
-        return user.json()
+        print(base_url+f'get-user/{chat_id}/')
+        user = requests.get(base_url+f'get-user/{chat_id}/')
+        return user
 
     def delete_user(self, chat_id):
         user = requests.post(base_url + 'delete-user/{}/'.format(chat_id))
@@ -132,6 +133,17 @@ class DB:
         data = self.carts.remove((User.chat_id == chat_id) & (User.count > 0))
         return data
     
+    def add_order(self, chat_id):
+        user = requests.get(base_url + 'get-user/{}/'.format(chat_id)) 
+        user_data = user.json()
+        print(user_data)
+        # order_data = {
+        #     'chat_id': chat_id,
+        #     'address': address,
+        #     'comment': comment
+        # }
+        # order = requests.post(base_url + 'add-order/', data=order_data)
+        # return order.json()
 
 # test = DB('db.json')
 # get_sub_category = test.get_start(chat_id=1)

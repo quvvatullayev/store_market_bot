@@ -10,7 +10,7 @@ from telegram.ext import CallbackContext
 from db import DB
 
 db = DB('db.json')
-base_url = 'http://storemarket.pythonanywhere.com'
+base_url = 'https://storemarket.pythonanywhere.com'
 
 class Shop:
     def __init__(self) -> None:
@@ -23,6 +23,7 @@ class Shop:
         reply_keyboard = [
             ['📦 katalog', '🛒 karzinka'],
             ['📝 zakazlarim', '📞 aloqa'],
+            ['👤 profil', "🔐 ro'yxatdan o'tish"]
         ]
         markup = ReplyKeyboardMarkup(reply_keyboard, resize_keyboard=True)
         text = 'Assalomu alaykum, {}!\n\nSizga qanday yordam bera olaman?'.format(update.message.from_user.first_name)
@@ -218,3 +219,31 @@ class Shop:
         text = 'Savat tozalandi\n\n'
         text += '📦 katalog'
         query.bot.send_message(chat_id=chat_id, text=text)
+
+    def order(self, update: Update, context: CallbackContext):
+        query = update.callback_query
+        chat_id = query.message.chat_id
+        try:
+            get_user = db.get_user(chat_id=chat_id)
+
+            if get_user['status']:
+                print(get_user)
+                text = 'Iltimos avval ro\'yxatdan o\'ting\n\n'
+                query.bot.send_message(chat_id=chat_id, text=text)
+
+            else:
+                # db.delete_cart(chat_id=chat_id)
+                # db.add_order(chat_id=chat_id)
+                
+
+                # query.bot.edit_message_reply_markup(reply_markup=None, chat_id=chat_id, message_id=query.message.message_id)
+
+                # text = 'Buyurtma qabul qilindi\n\n'
+                # text += '📦 katalog'
+                # query.bot.send_message(chat_id=chat_id, text=text)
+                print('ok')
+        except:
+            query.edit_message_reply_markup(reply_markup=None)
+            text = 'Iltimos avval ro\'yxatdan o\'ting❗️\n\n'
+            query.bot.send_message(chat_id=chat_id, text=text)
+        

@@ -17,6 +17,7 @@ dispatcher.add_handler(CallbackQueryHandler(shop.next_product, pattern='next_'))
 dispatcher.add_handler(CallbackQueryHandler(shop.back_product, pattern='backe_'))
 dispatcher.add_handler(CallbackQueryHandler(shop.add_cart, pattern='add_cart_'))
 dispatcher.add_handler(CallbackQueryHandler(shop.clear_cart, pattern='clear_cart_'))
+dispatcher.add_handler(CallbackQueryHandler(shop.order, pattern='order_'))
 dispatcher.add_handler(MessageHandler(Filters.text, shop.count_cart))
 
 updater.start_polling()
