@@ -156,6 +156,10 @@ class DB:
         user_id = user['data']['id']
         orders = requests.get(base_url+f'get-user-order/{user_id}/')
         return orders.json()
+    
+    def get_contact(self):
+        contact = requests.get(base_url + 'contact-store-list/')
+        return contact.json()
 
 # test = DB('db.json')
 # get_sub_category = test.get_start(chat_id=1)

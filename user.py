@@ -54,13 +54,17 @@ class UserClass:
         bot = context.bot
         chat_id = update.message.chat_id
 
-        user = db.get_user(chat_id=chat_id)['data']
-
-
-        text = f'👤 Profil\n\n'
-        text += f'👤 Foydalanuvchi: {user["name"]}\n'
-        text += f'👤 Username: {user["username"]}\n'
-        text += f'📞 Telefon raqam: {user["phone"]}\n\n'
-        
-        reply_markup = ReplyKeyboardMarkup([[KeyboardButton('📝 zakazlarim'), KeyboardButton('🏠 Bosh sahifa')]], resize_keyboard=True)
-        bot.send_message(chat_id=chat_id, text=text, reply_markup=reply_markup)
+        try:
+            user = db.get_user(chat_id=chat_id)['data']
+            
+            text = f'👤 Profil\n\n'
+            text += f'👤 Foydalanuvchi: {user["name"]}\n'
+            text += f'👤 Username: {user["username"]}\n'
+            text += f'📞 Telefon raqam: {user["phone"]}\n\n'
+            
+            reply_markup = ReplyKeyboardMarkup([[KeyboardButton('📝 zakazlarim'), KeyboardButton('🏠 Bosh sahifa')]], resize_keyboard=True)
+            bot.send_message(chat_id=chat_id, text=text, reply_markup=reply_markup)
+        except:
+            text = '❗️ Siz ro\'yxatdan o\'tmagansiz\n\n'
+            text += '🔐 Ro\'yxatdan o\'tish tugmasini bosing'
+            bot.send_message(chat_id=chat_id, text=text)
