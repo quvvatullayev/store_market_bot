@@ -161,9 +161,8 @@ class Katalog:
             query.bot.send_message(chat_id=chat_id, text=text)
         
         except:
-            query.bot.edit_message_reply_markup(reply_markup=None, chat_id=chat_id, message_id=query.message.message_id)
 
             text = "Iltimos avval ro'yxatdan o'ting\n\n"
             text += "🔐 ro'yxatdan o'tish tubmasini bosing"
 
-            query.bot.send_message(chat_id=chat_id, text=text)
+            query.bot.send_message(chat_id=chat_id, text=text, reply_markup=None)
