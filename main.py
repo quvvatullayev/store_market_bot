@@ -27,7 +27,8 @@ class Shop:
             text += 'Siz botni admin sifatida ishlatasiz'
 
             reply_keyboard = [
-                ['📝 kelgan zakazlar', "📝 bajarilgan zakazlar ✅"]
+                ['📝 kelgan zakazlar'],
+                ["📝 yetkazilgan zakazlar ✅", "📝 yetkazilmagan zakazlar ☑️"]
             ]
             markup = ReplyKeyboardMarkup(reply_keyboard, resize_keyboard=True)
             bot.send_message(chat_id=chat_id, text=text, reply_markup=markup)
