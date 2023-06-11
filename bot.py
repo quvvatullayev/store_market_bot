@@ -44,7 +44,7 @@ dispatcher.add_handler(CallbackQueryHandler(katalog.back_product, pattern='backe
 dispatcher.add_handler(CallbackQueryHandler(katalog.add_cart, pattern='add_cart_'))
 dispatcher.add_handler(CallbackQueryHandler(cart.clear_cart, pattern='clear_cart_'))
 dispatcher.add_handler(CallbackQueryHandler(cart.order, pattern='order_'))
-dispatcher.add_handler(MessageHandler(Filters.regex(r'^\d+$'), order.get_order_by_id))
+dispatcher.add_handler(MessageHandler(Filters.regex(r'^\d+t$'), order.get_order_by_id))
 dispatcher.add_handler(MessageHandler(Filters.text, cart.count_cart))
 
 updater.start_polling()

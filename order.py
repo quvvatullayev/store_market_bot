@@ -67,8 +67,8 @@ class Order:
         bot = context.bot
         chat_id = update.message.chat_id
 
-        text = '🆔 Buyurtma id raqamini kiriting\n\n'
-        text += 'Masalan: 1'
+        text = '🆔 Buyurtma id raqamini oxiriga "t" belgisini qo\'shib kiriting\n\n'
+        text += 'Masalan: 1t'
         bot.send_message(chat_id=chat_id, text=text)
 
     def get_order_by_id(self, update: Update, context: CallbackContext):
@@ -77,7 +77,11 @@ class Order:
         text = update.message.text
 
         try:
-            order_id = int(text)
+            num = ''
+            for i in text:
+                if i.isdigit():
+                    num += i
+            order_id = int(num)
             order = db.get_order_by_id(order_id=order_id)['data']
             product = order['product']
             
