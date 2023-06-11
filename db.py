@@ -148,8 +148,8 @@ class DB:
     
     def add_order(self, order_list):
         print(order_list)
-        data = requests.post(base_url + 'add-order/', data=order_list)
-        print(data)
+        # data = requests.post(base_url + 'add-order/', data=order_list)
+        # print(data, True)
         return True
     
     def get_orders(self, chat_id):
@@ -162,6 +162,13 @@ class DB:
         contact = requests.get(base_url + 'contact-store-list/')
         return contact.json()
 
+    def get_admin_by_username(self, username):
+        admin = requests.get(base_url + f'get-admin-user/{username}/')
+        if admin.status_code == 200:
+            return admin.json()
+        else:
+            return False
+
 # test = DB('db.json')
-# get_sub_category = test.get_start(chat_id=1)
+# get_sub_category = test.get_admin_by_username('storemarket')
 # print(get_sub_category)
