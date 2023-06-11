@@ -68,3 +68,28 @@ class UserClass:
             text = '❗️ Siz ro\'yxatdan o\'tmagansiz\n\n'
             text += '🔐 Ro\'yxatdan o\'tish tugmasini bosing'
             bot.send_message(chat_id=chat_id, text=text)
+
+    def admin_order_list(self, update: Update, context: CallbackContext):
+        bot = context.bot
+        chat_id = update.message.chat_id
+
+        orders = db.get_order_list()['data']
+        text = '📝 Kelgan zakazlar\n\n'
+        for order in orders:
+            text += f'🆔 Buyurtma raqami: {order["id"]}\n'
+            text += f'👤 Foydalanuvchi: {order["user"]["name"]}\n'
+            text += f'👤 Username: {order["user"]["username"]}\n'
+            text += f'📞 Telefon raqam: {order["user"]["phone"]}\n'
+            text += f'📦 Buyurtma: {order["product"]["name"]}so\'m\n'
+            text += f'📦 Buyurtma soni: {order["count"]}\n'
+            text += f'📦 Buyurtma narxi: {order["product"]["price"]}\n'
+            text += f'📦 Buyurtma umumiy narxi: {order["product"]["price"] * order["count"]}so\'m\n\n'
+
+
+        keyboard = [
+            ['📝 Buyurtma informations','🏠 Bosh sahifa']
+        ]
+        
+        reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
+        
+        bot.send_message(chat_id=chat_id, text=text, reply_markup=reply_markup)

@@ -56,3 +56,46 @@ class Order:
             text += '❗️ Yoki siz ro\'yxatdan o\'tmagansiz\n\n'
             text += '🔐 Ro\'yxatdan o\'tish tugmasini bosing'
             bot.send_message(chat_id=chat_id, text='📦 Siz hali buyurtma bermagansiz')
+
+    def get_information(self, update: Update, context: CallbackContext):
+        bot = context.bot
+        chat_id = update.message.chat_id
+
+        text = '🆔 Buyurtma id raqamini kiriting\n\n'
+        text += 'Masalan: 1'
+        bot.send_message(chat_id=chat_id, text=text)
+
+    def get_order_by_id(self, update: Update, context: CallbackContext):
+        bot = context.bot
+        chat_id = update.message.chat_id
+        text = update.message.text
+
+        try:
+            order_id = int(text)
+            order = db.get_order_by_id(order_id=order_id)['data']
+            product = order['product']
+            user = order['user']
+
+            text = f'📝 Zakazlarim\n\n'
+            if order['status']:
+                text += f'📦 Buyurtma yuborilgan🆗\n\n'
+            else:
+                text += f'📦 Buyurtma yuborilmagan🚫\n\n'
+            text += f'🆔 Buyurtma id: {order["id"]}\n'
+            text += f'👤 Foydalanuvchi: {user["name"]}\n'
+            text += f"👤 Username: @{user['username']}\n"
+            text += f'📞 Telefon raqam: {user["phone"]}\n'
+            text += f'📦 Buyurtma:\n\n'
+            text += f'🧩 {product["name"]}\n'
+            text += f'💵 Narxi: {product["price"]} so\'m\n'
+            text += f'🧮 Soni: {order["count"]} ta\n'
+            text += f'💰 {order["count"]} x {product["price"]} = {order["count"] * product["price"]} so\'m\n\n'
+
+            reply_markup = ReplyKeyboardMarkup([[KeyboardButton('🏠 Bosh sahifa')]], resize_keyboard=True)
+            bot.send_message(chat_id=chat_id, text=text, reply_markup=reply_markup)
+        except:
+            text = '❗️ Xatolik yuz berdi\n'
+            text += "Bu buyurtma id raqami mavjud emas\n\n"
+            text += '🆔 Buyurtma id raqamini kiriting\n\n'
+            text += 'Masalan: 1'
+            bot.send_message(chat_id=chat_id, text=text)

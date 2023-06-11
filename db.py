@@ -158,6 +158,14 @@ class DB:
         orders = requests.get(base_url+f'get-user-order/{user_id}/')
         return orders.json()
     
+    def get_order_list(self):
+        order = requests.get(base_url+f'order-list/')
+        return order.json()
+    
+    def get_order_by_id(self, order_id):
+        order = requests.get(base_url+f'get-order-by-id/{order_id}/')
+        return order.json()
+    
     def get_contact(self):
         contact = requests.get(base_url + 'contact-store-list/')
         return contact.json()
@@ -170,5 +178,5 @@ class DB:
             return False
 
 # test = DB('db.json')
-# get_sub_category = test.get_admin_by_username('storemarket')
+# get_sub_category = test.get_order_by_id(15)
 # print(get_sub_category)
