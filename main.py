@@ -27,7 +27,7 @@ class Shop:
             text += 'Siz botni admin sifatida ishlatasiz'
 
             reply_keyboard = [
-                ['📝 kelgan zakazlar'],
+                ['📝 kelgan zakazlar', '🔐 admin'],
                 ["📝 yetkazilgan zakazlar ✅", "📝 yetkazilmagan zakazlar ☑️"]
             ]
             markup = ReplyKeyboardMarkup(reply_keyboard, resize_keyboard=True)

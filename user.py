@@ -93,3 +93,24 @@ class UserClass:
         reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
         
         bot.send_message(chat_id=chat_id, text=text, reply_markup=reply_markup)
+
+    def admin_site(self, update: Update, context: CallbackContext):
+        bot = context.bot
+        chat_id = update.message.chat_id
+
+        inline_keyboard = [
+            [InlineKeyboardButton(url=base_url+'/admin/', text='🌐 Saytga kirish')]
+        ]
+
+        reply_markup = InlineKeyboardMarkup(inline_keyboard)
+        text = '🌐 Saytga kirish uchun pastdagi tugmani bosing'
+        bot.send_message(chat_id=chat_id, text=text, reply_markup=reply_markup)
+
+    def get_edit_order_text(self, update: Update, context: CallbackContext):
+        bot = context.bot
+        chat_id = update.message.chat_id
+
+        text = "✏️ Mijozga yetqizilgan maxsulotning id siniga 'u' yoki 'U' ni qo'shib kriting.\n\n"
+        text += "Masalan: 7u"
+
+        bot.send_message(chat_id, text)

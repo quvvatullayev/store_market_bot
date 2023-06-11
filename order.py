@@ -291,11 +291,33 @@ class Order:
                 text += '📦 Hali brorta buyurtma yuborilmagan'
 
             keyboard = [
-                [KeyboardButton('📝 Buyurtma informations')],
+                [KeyboardButton('📝 Buyurtma informations'), KeyboardButton('✏️ Buyurtmalarni taxrirlash')],
                 [KeyboardButton('🏠 Bosh sahifa')],
             ]
             reply_markup = ReplyKeyboardMarkup(keyboard=keyboard, resize_keyboard=True)
             bot.send_message(chat_id=chat_id, text=text, reply_markup=reply_markup)
         except:
             text = '📦 Hali brorta buyurtma kelmagan'
+            bot.send_message(chat_id=chat_id, text=text)
+
+    def edit_order(self, update: Update, context: CallbackContext):
+        bot = context.bot
+        chat_id = update.message.chat_id
+        text = update.message.text
+        order_id = ''
+        for i in text:
+            if i.isdigit():
+                order_id += i
+        
+        try:
+            data = db.update_order(order_id=order_id)
+
+            user_chat_id = data['data']['user']['chat_id']
+            text = f'✅ {order_id} - idli buyurtmangiz yuborildi.\nU tez kunda yetibboradi.'
+            bot.send_message(user_chat_id, text)
+
+            text = '✅ Buyurtma yuborildi'
+            bot.send_message(chat_id=chat_id, text=text)
+        except:
+            text = '❗️ Xatolik yuz berdi'
             bot.send_message(chat_id=chat_id, text=text)

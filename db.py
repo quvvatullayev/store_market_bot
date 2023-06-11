@@ -166,6 +166,14 @@ class DB:
         order = requests.get(base_url+f'get-order-by-id/{order_id}/')
         return order.json()
     
+    def update_order(self, order_id):
+        data = {
+            'id': order_id,
+            'status': True            
+        }
+        order = requests.post(base_url+f'update-order/', json=data)
+        return order.json()
+    
     def get_contact(self):
         contact = requests.get(base_url + 'contact-store-list/')
         return contact.json()
@@ -178,5 +186,5 @@ class DB:
             return False
 
 # test = DB('db.json')
-# get_sub_category = test.get_order_by_id(15)
+# get_sub_category = test.update_order(16)
 # print(get_sub_category)

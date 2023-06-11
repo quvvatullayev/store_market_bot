@@ -34,6 +34,8 @@ dispatcher.add_handler(MessageHandler(Filters.text('☑️ yuborilmagan buyurtma
 dispatcher.add_handler(MessageHandler(Filters.text('✅ yuborilgan buyurtmalar'), order.get_order_status_true))
 dispatcher.add_handler(MessageHandler(Filters.text('📝 yetkazilgan zakazlar ✅'), order.get_order_status_true_admin))
 dispatcher.add_handler(MessageHandler(Filters.text('📝 yetkazilmagan zakazlar ☑️'), order.get_order_status_false_admin))
+dispatcher.add_handler(MessageHandler(Filters.text('🔐 admin'), user.admin_site))
+dispatcher.add_handler(MessageHandler(Filters.text('✏️ Buyurtmalarni taxrirlash'), user.get_edit_order_text))
 dispatcher.add_handler(MessageHandler(Filters.location, cart.add_order))
 dispatcher.add_handler(MessageHandler(Filters.contact, user.add_user))
 dispatcher.add_handler(CallbackQueryHandler(cart.refresh, pattern='refresh_'))
@@ -44,6 +46,8 @@ dispatcher.add_handler(CallbackQueryHandler(katalog.back_product, pattern='backe
 dispatcher.add_handler(CallbackQueryHandler(katalog.add_cart, pattern='add_cart_'))
 dispatcher.add_handler(CallbackQueryHandler(cart.clear_cart, pattern='clear_cart_'))
 dispatcher.add_handler(CallbackQueryHandler(cart.order, pattern='order_'))
+dispatcher.add_handler(MessageHandler(Filters.regex(r'^\d+u$'), order.edit_order))
+dispatcher.add_handler(MessageHandler(Filters.regex(r'^\d+U$'), order.edit_order))
 dispatcher.add_handler(MessageHandler(Filters.regex(r'^\d+t$'), order.get_order_by_id))
 dispatcher.add_handler(MessageHandler(Filters.text, cart.count_cart))
 
