@@ -89,8 +89,10 @@ class UserClass:
                 text += f'📍 Manzil: {user["address"]}\n\n'
                 text += f'📦 Buyurtma: {order["product"]["name"]}so\'m\n'
                 text += f'📦 Buyurtma soni: {order["count"]}\n'
-                text += f'📦 Buyurtma narxi: {order["product"]["price"]}\n'
-                text += f'📦 Buyurtma umumiy narxi: {order["product"]["price"] * order["count"]}so\'m\n\n'
+                price = '{:,.0f}'.format(order["product"]["price"])
+                text += f'📦 Buyurtma narxi: {price}\n'
+                count = '{:,.0f}'.format(order["product"]["price"] * order["count"])
+                text += f'📦 Buyurtma umumiy narxi: {count}so\'m\n\n'
 
 
         keyboard = [

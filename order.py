@@ -44,10 +44,13 @@ class Order:
             if orders:
                 for order in orders:
                     text += f'🧩 {order["product"]["name"]}\n'
-                    text += f'💵 Narxi: {order["product"]["price"]} so\'m\n'
+                    price = '{:,.0f}'.format(order["product"]["price"])
+                    text += f'💵 Narxi: {price} so\'m\n'
                     text += f'🧮 Soni: {order["count"]} ta\n'
-                    text += f'💰 {order["count"]} x {order["product"]["price"]} = {order["count"] * order["product"]["price"]} so\'m\n\n'
+                    count = '{:,.0f}'.format(order["count"] * order["product"]["price"])
+                    text += f'💰 {order["count"]} x {order["product"]["price"]} = {count} so\'m\n\n'
                     sum_all += order["count"] * order["product"]["price"]
+                sum_all = '{:,.0f}'.format(sum_all)
                 text += f'💰 Jami: {sum_all} so\'m\n\n'
 
             else:
@@ -103,9 +106,11 @@ class Order:
             text += f'📍 Manzil: {user["address"]}\n\n'
             text += f'📦 Buyurtma:\n\n'
             text += f'🧩 {product["name"]}\n'
-            text += f'💵 Narxi: {product["price"]} so\'m\n'
+            price = '{:,.0f}'.format(product["price"])
+            text += f'💵 Narxi: {price} so\'m\n'
             text += f'🧮 Soni: {order["count"]} ta\n'
-            text += f'💰 {order["count"]} x {product["price"]} = {order["count"] * product["price"]} so\'m\n\n'
+            count = '{:,.0f}'.format(order["count"] * product["price"])
+            text += f'💰 {order["count"]} x {product["price"]} = {count} so\'m\n\n'
 
             bot.send_message(chat_id=chat_id, text=text)
 
@@ -154,11 +159,14 @@ class Order:
                     if not order['status']:
                         text += f'🆔 Buyurtma id: {order["id"]}\n'
                         text += f'🧩 {order["product"]["name"]}\n'
-                        text += f'💵 Narxi: {order["product"]["price"]} so\'m\n'
+                        price = '{:,.0f}'.format(order["product"]["price"])
+                        text += f'💵 Narxi: {price} so\'m\n'
                         text += f'🧮 Soni: {order["count"]} ta\n'
-                        text += f'💰 {order["count"]} x {order["product"]["price"]} = {order["count"] * order["product"]["price"]} so\'m\n\n'
+                        count = '{:,.0f}'.format(order["count"] * order["product"]["price"])
+                        text += f'💰 {order["count"]} x {order["product"]["price"]} = {count} so\'m\n\n'
                         sum_all += order["count"] * order["product"]["price"]
-                text += f'💰 Jami: {sum_all} so\'m\n\n'
+                all_sum = '{:,.0f}'.format(sum_all)
+                text += f'💰 Jami: {all_sum} so\'m\n\n'
 
             else:
                 text += '📦 Siz hali buyurtma bermagansiz'
@@ -203,11 +211,14 @@ class Order:
                     if order['status']:
                         text += f'🆔 Buyurtma id: {order["id"]}\n'
                         text += f'🧩 {order["product"]["name"]}\n'
-                        text += f'💵 Narxi: {order["product"]["price"]} so\'m\n'
+                        price = '{:,.0f}'.format(order["product"]["price"])
+                        text += f'💵 Narxi: {price} so\'m\n'
                         text += f'🧮 Soni: {order["count"]} ta\n'
-                        text += f'💰 {order["count"]} x {order["product"]["price"]} = {order["count"] * order["product"]["price"]} so\'m\n\n'
+                        count = '{:,.0f}'.format(order["count"] * order["product"]["price"])
+                        text += f'💰 {order["count"]} x {order["product"]["price"]} = {count} so\'m\n\n'
                         sum_all += order["count"] * order["product"]["price"]
-                text += f'💰 Jami: {sum_all} so\'m\n\n'
+                all_sum = '{:,.0f}'.format(sum_all)
+                text += f'💰 Jami: {all_sum} so\'m\n\n'
 
             else:
                 text += '📦 Siz hali buyurtma bermagansiz'
@@ -251,11 +262,14 @@ class Order:
                         text += f'📍 Manzil: {user["address"]}\n\n'
 
                         text += f'🧩 {order["product"]["name"]}\n'
-                        text += f'💵 Narxi: {order["product"]["price"]} so\'m\n'
+                        price = '{:,.0f}'.format(order["product"]["price"])
+                        text += f'💵 Narxi: {price} so\'m\n'
                         text += f'🧮 Soni: {order["count"]} ta\n'
-                        text += f'💰 {order["count"]} x {order["product"]["price"]} = {order["count"] * order["product"]["price"]} so\'m\n\n'
+                        count = '{:,.0f}'.format(order["count"] * order["product"]["price"])
+                        text += f'💰 {order["count"]} x {order["product"]["price"]} = {count} so\'m\n\n'
                         sum_all += order["count"] * order["product"]["price"]
-                text += f'💰 Jami: {sum_all} so\'m\n\n'
+                all_sum = '{:,.0f}'.format(sum_all)
+                text += f'💰 Jami: {all_sum} so\'m\n\n'
 
             else:
                 text += '📦 Hali brorta buyurtma yuborilmagan'
@@ -295,11 +309,14 @@ class Order:
                         text += f'📞 Telefon raqam: {user["phone"]}\n'
                         text += f'📍 Manzil: {user["address"]}\n\n'
                         text += f'🧩 {order["product"]["name"]}\n'
-                        text += f'💵 Narxi: {order["product"]["price"]} so\'m\n'
+                        price = '{:,.0f}'.format(order["product"]["price"])
+                        text += f'💵 Narxi: {price} so\'m\n'
                         text += f'🧮 Soni: {order["count"]} ta\n'
-                        text += f'💰 {order["count"]} x {order["product"]["price"]} = {order["count"] * order["product"]["price"]} so\'m\n\n'
+                        count = '{:,.0f}'.format(order["count"] * order["product"]["price"])
+                        text += f'💰 {order["count"]} x {order["product"]["price"]} = {count} so\'m\n\n'
                         sum_all += order["count"] * order["product"]["price"]
-                text += f'💰 Jami: {sum_all} so\'m\n\n'
+                all_sum = '{:,.0f}'.format(sum_all)
+                text += f'💰 Jami: {all_sum} so\'m\n\n'
 
             else:
                 text += '📦 Hali brorta buyurtma yuborilmagan'

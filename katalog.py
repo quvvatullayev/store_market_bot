@@ -67,7 +67,7 @@ class Katalog:
             price = product['price']
             discription = product['discription']
             
-            caption = f"📦 Nomi: {name}\n💰 Narxi: {price}\n📝 Ta'rif: {discription}"
+            caption = f"📦 Nomi: {name}\n💰 Narxi: {'{:,.0f}'.format(price)}\n📝 Ta'rif: {discription}"
             inline_keyboard = [
                 [
                     InlineKeyboardButton('⬅️ Orqaga', callback_data=f"backe_{sub_category_id}_{product['id']}"),
@@ -96,7 +96,7 @@ class Katalog:
         price = product['price']
         discription = product['discription']
         
-        caption = f"📦 Nomi: {name}\n💰 Narxi: {price}\n📝 Ta'rif: {discription}"
+        caption = f"📦 Nomi: {name}\n💰 Narxi: {'{:,.0f}'.format(price)}\n📝 Ta'rif: {discription}"
         inline_keyboard = [
             [
                 InlineKeyboardButton('⬅️ Orqaga', callback_data=f"backe_{sub_category_id}_{product['id']}"),
@@ -121,10 +121,10 @@ class Katalog:
 
         image = base_url + product['image']
         name = product['name']
-        price = product['price']
+        price = '{:,.0f}'.format(product['price'])
         discription = product['discription']
 
-        caption = f"📦 Nomi: {name}\n💰 Narxi: {price}\n📝 Ta'rif: {discription}"
+        caption = f"📦 Nomi: {name}\n💰 Narxi: {'{:,.0f}'.format(price)}\n📝 Ta'rif: {discription}"
         inline_keyboard = [
             [
                 InlineKeyboardButton('⬅️ Orqaga', callback_data=f"backe_{sub_category_id}_{product['id']}"),
