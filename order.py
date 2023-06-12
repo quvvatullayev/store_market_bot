@@ -320,4 +320,5 @@ class Order:
             bot.send_message(chat_id=chat_id, text=text)
         except:
             text = '❗️ Xatolik yuz berdi'
+            text += 'Bu buyurtma id raqami mavjud emas\n\n'
             bot.send_message(chat_id=chat_id, text=text)

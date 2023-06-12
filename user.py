@@ -76,14 +76,15 @@ class UserClass:
         orders = db.get_order_list()['data']
         text = '📝 Kelgan zakazlar\n\n'
         for order in orders:
-            text += f'🆔 Buyurtma raqami: {order["id"]}\n'
-            text += f'👤 Foydalanuvchi: {order["user"]["name"]}\n'
-            text += f'👤 Username: {order["user"]["username"]}\n'
-            text += f'📞 Telefon raqam: {order["user"]["phone"]}\n'
-            text += f'📦 Buyurtma: {order["product"]["name"]}so\'m\n'
-            text += f'📦 Buyurtma soni: {order["count"]}\n'
-            text += f'📦 Buyurtma narxi: {order["product"]["price"]}\n'
-            text += f'📦 Buyurtma umumiy narxi: {order["product"]["price"] * order["count"]}so\'m\n\n'
+            if order['status'] == False:
+                text += f'🆔 Buyurtma raqami: {order["id"]}\n'
+                text += f'👤 Foydalanuvchi: {order["user"]["name"]}\n'
+                text += f'👤 Username: {order["user"]["username"]}\n'
+                text += f'📞 Telefon raqam: {order["user"]["phone"]}\n'
+                text += f'📦 Buyurtma: {order["product"]["name"]}so\'m\n'
+                text += f'📦 Buyurtma soni: {order["count"]}\n'
+                text += f'📦 Buyurtma narxi: {order["product"]["price"]}\n'
+                text += f'📦 Buyurtma umumiy narxi: {order["product"]["price"] * order["count"]}so\'m\n\n'
 
 
         keyboard = [

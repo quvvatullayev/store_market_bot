@@ -147,9 +147,8 @@ class DB:
         return data
     
     def add_order(self, order_list):
-        print(order_list)
-        # data = requests.post(base_url + 'add-order/', data=order_list)
-        # print(data, True)
+        data = requests.post(base_url + 'add-order-list/', json=order_list)
+        print(data.json(), True)
         return True
     
     def get_orders(self, chat_id):
