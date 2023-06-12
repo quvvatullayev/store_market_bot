@@ -29,67 +29,76 @@ class Auth_bot:
         telegram = update.message.from_user.username
         chat_id = update.message.chat_id
         try:
-            if telegram:
-                get_append = db.get_user_append(chat_id)
-                if text == "🔐 ro'yxatdan o'tish":
-                    if db.chack_user(chat_id) == "200":
-                        update.message.reply_text(
-                            'Siz ro\'yxatdan o\'tgansiz ‼️'
-                        )
-                    elif db.chack_user(chat_id) == "401":
-                        db.user_append(chat_id)
-                        update.message.reply_text(
-                            'Iltimos, ismingizni 📝\n\nNamuna: Muhammad'
-                        )
-            
-                elif get_append.get("name") == None:
-                    db.user_append(chat_id, name=text, telegram=telegram)
+            try:
+                get_user = base_db.get_user(chat_id=chat_id)
+                if get_user:
                     update.message.reply_text(
-                        'Familiyangizni kiriting📝\n\nNamuna: Abdullayev'
+                        'Siz allaqachon ro\'yxatdan o\'tgansiz\n\n'
+                        '✅ Buyurtma berishingiz mumkin\n\n'
+                        '📝 Zakaz berish uchun 📦 katalog buyrug\'ini yuboring'
                     )
-                elif get_append.get("surname") == None:
-                    db.user_append(chat_id, surname=text)
-                    update.message.reply_text(
-                        'Telefon raqamingizni kiriting📲\n\nNamuna: +998 99 999 99 99'
-                    )
-                elif get_append.get("phone") == None:
-                    db.user_append(chat_id, phone=text)
-                    update.message.reply_text(
-                        'Yashash manzilingizni kiriting(shahar yoki tuman)📍\n\nNamuna: Toshkent shahar'
-                    )
-                elif get_append.get("area") == None:
-                    db.user_append(chat_id, area=text)
-
-                    get_append_user = db.get_user_append(chat_id)
-
-                    name = get_append_user.get("name")
-                    surname = get_append_user.get("surname")
-                    phone = get_append_user.get("phone")
-                    area = get_append_user.get("area")
-                    username = update.message.from_user.username
-
-                    inline_keyboard = [
-                        [
-                            InlineKeyboardButton(
-                                text="Yes", callback_data=f"yes_{telegram}_{username}"
-                            ),
-                            InlineKeyboardButton(
-                                text="No", callback_data="no"
+            except:
+                if telegram:
+                    get_append = db.get_user_append(chat_id)
+                    if text == "🔐 ro'yxatdan o'tish":
+                        if db.chack_user(chat_id) == "200":
+                            update.message.reply_text(
+                                'Siz ro\'yxatdan o\'tgansiz ‼️'
                             )
+                        elif db.chack_user(chat_id) == "401":
+                            db.user_append(chat_id)
+                            update.message.reply_text(
+                                'Iltimos, ismingizni 📝\n\nNamuna: Muhammad'
+                            )
+                
+                    elif get_append.get("name") == None:
+                        db.user_append(chat_id, name=text, telegram=telegram)
+                        update.message.reply_text(
+                            'Familiyangizni kiriting📝\n\nNamuna: Abdullayev'
+                        )
+                    elif get_append.get("surname") == None:
+                        db.user_append(chat_id, surname=text)
+                        update.message.reply_text(
+                            'Telefon raqamingizni kiriting📲\n\nNamuna: +998 99 999 99 99'
+                        )
+                    elif get_append.get("phone") == None:
+                        db.user_append(chat_id, phone=text)
+                        update.message.reply_text(
+                            'Yashash manzilingizni kiriting(shahar yoki tuman)📍\n\nNamuna: Toshkent shahar'
+                        )
+                    elif get_append.get("area") == None:
+                        db.user_append(chat_id, area=text)
+
+                        get_append_user = db.get_user_append(chat_id)
+
+                        name = get_append_user.get("name")
+                        surname = get_append_user.get("surname")
+                        phone = get_append_user.get("phone")
+                        area = get_append_user.get("area")
+                        username = update.message.from_user.username
+
+                        inline_keyboard = [
+                            [
+                                InlineKeyboardButton(
+                                    text="Yes", callback_data=f"yes_{telegram}_{username}"
+                                ),
+                                InlineKeyboardButton(
+                                    text="No", callback_data="no"
+                                )
+                            ]
                         ]
-                    ]
 
-                    reply_markup = InlineKeyboardMarkup(inline_keyboard)
+                        reply_markup = InlineKeyboardMarkup(inline_keyboard)
 
 
+                        update.message.reply_text(
+                            f'Ma\'lumotlaringizni tekshirib yuboring✅\n\nIsm: {name}\nFamiliya: {surname}\nTelefon raqam: {phone}\nYashash manzil: {area}\n\nAgar ma\'lumotlar to\'g\'ri bo\'lsa yes, to\'g\'ri emas bo\'lsa no ni bosing👇',
+                            reply_markup=reply_markup
+                        )
+                else:
                     update.message.reply_text(
-                        f'Ma\'lumotlaringizni tekshirib yuboring✅\n\nIsm: {name}\nFamiliya: {surname}\nTelefon raqam: {phone}\nYashash manzil: {area}\n\nAgar ma\'lumotlar to\'g\'ri bo\'lsa yes, to\'g\'ri emas bo\'lsa no ni bosing👇',
-                        reply_markup=reply_markup
+                        'Iltimos, telegramdagi ismingizni\n shaxsiy kabinetga kiriting va /start \nbuyrug\'ini qayta bering ‼️'
                     )
-            else:
-                update.message.reply_text(
-                    'Iltimos, telegramdagi ismingizni\n shaxsiy kabinetga kiriting va /start \nbuyrug\'ini qayta bering ‼️'
-                )
         except:
             pass
 

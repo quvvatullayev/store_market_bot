@@ -58,9 +58,12 @@ class UserClass:
             user = db.get_user(chat_id=chat_id)['data']
             
             text = f'👤 Profil\n\n'
-            text += f'👤 Foydalanuvchi: {user["name"]}\n'
-            text += f'👤 Username: {user["username"]}\n'
-            text += f'📞 Telefon raqam: {user["phone"]}\n\n'
+            text += f'👤 Username: @{user["username"]}\n'
+            text += f'👤 Ism: {user["first_name"]}\n'
+            text += f'👤 Familiya: {user["last_name"]}\n'
+            text += f'📞 Telefon raqam: {user["phone"]}\n'
+            text += f'📍 Manzil: {user["address"]}\n\n'
+
             
             reply_markup = ReplyKeyboardMarkup([[KeyboardButton('📝 zakazlarim'), KeyboardButton('🏠 Bosh sahifa')]], resize_keyboard=True)
             bot.send_message(chat_id=chat_id, text=text, reply_markup=reply_markup)
@@ -77,10 +80,13 @@ class UserClass:
         text = '📝 Kelgan zakazlar\n\n'
         for order in orders:
             if order['status'] == False:
+                user = order['user']
                 text += f'🆔 Buyurtma raqami: {order["id"]}\n'
-                text += f'👤 Foydalanuvchi: {order["user"]["name"]}\n'
-                text += f'👤 Username: {order["user"]["username"]}\n'
-                text += f'📞 Telefon raqam: {order["user"]["phone"]}\n'
+                text += f'👤 Username: @{user["username"]}\n'
+                text += f'👤 Ism: {user["first_name"]}\n'
+                text += f'👤 Familiya: {user["last_name"]}\n'
+                text += f'📞 Telefon raqam: {user["phone"]}\n'
+                text += f'📍 Manzil: {user["address"]}\n\n'
                 text += f'📦 Buyurtma: {order["product"]["name"]}so\'m\n'
                 text += f'📦 Buyurtma soni: {order["count"]}\n'
                 text += f'📦 Buyurtma narxi: {order["product"]["price"]}\n'

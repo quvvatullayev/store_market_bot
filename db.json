@@ -1,195 +1,145 @@
 {
     "categories": {
-        "16": {
-            "id": 1,
-            "name": "erkaklar fo'dbolkasi",
-            "image": "/category/Screenshot_from_2023-06-07_19-04-13.png",
-            "chat_id": 1800474930
-        },
-        "17": {
-            "id": 2,
-            "name": "ayollay kyimlari",
-            "image": "/category/Screenshot_from_2023-06-07_19-04-13_Fwr0Rwo.png",
-            "chat_id": 1800474930
-        },
-        "18": {
-            "id": 3,
-            "name": "sovun",
-            "image": "/category/git2.png",
-            "chat_id": 1800474930
-        },
-        "19": {
-            "id": 1,
-            "name": "erkaklar fo'dbolkasi",
-            "image": "/category/Screenshot_from_2023-06-07_19-04-13.png",
-            "chat_id": 5503011861
-        },
-        "20": {
-            "id": 2,
-            "name": "ayollay kyimlari",
-            "image": "/category/Screenshot_from_2023-06-07_19-04-13_Fwr0Rwo.png",
-            "chat_id": 5503011861
-        },
-        "21": {
-            "id": 3,
-            "name": "sovun",
-            "image": "/category/git2.png",
-            "chat_id": 5503011861
-        }
-    },
-    "sub_categories": {
-        "34": {
-            "id": 1,
-            "name": "kastum shim",
-            "image": "/sub_category/Screenshot_from_2023-06-07_19-04-13.png",
-            "category": 1,
-            "chat_id": 1800474930
-        },
-        "35": {
-            "id": 3,
-            "name": "ko'ylaklar",
-            "image": "/sub_category/Screenshot_from_2023-06-07_19-04-13_9ZETUgT.png",
-            "category": 1,
-            "chat_id": 1800474930
-        },
-        "36": {
-            "id": 4,
-            "name": "ayollar sumkasi",
-            "image": "/sub_category/newpython.png",
-            "category": 2,
-            "chat_id": 1800474930
-        },
-        "37": {
-            "id": 5,
-            "name": "ayollar kyimi",
-            "image": "/sub_category/Screenshot_from_2023-06-07_16-21-20.png",
-            "category": 2,
-            "chat_id": 1800474930
-        },
-        "38": {
-            "id": 6,
-            "name": "ayol byuk 111",
-            "image": "/sub_category/Screenshot_from_2023-06-07_16-21-20_UddTF5r.png",
-            "category": 2,
-            "chat_id": 1800474930
-        },
-        "39": {
-            "id": 7,
-            "name": "ayollar sovuni",
-            "image": "/sub_category/tinydbnew.png",
-            "category": 3,
-            "chat_id": 1800474930
-        },
-        "40": {
-            "id": 8,
-            "name": "erkaklar sovunlari",
-            "image": "/sub_category/newpython_sXeo6v0.png",
-            "category": 3,
-            "chat_id": 1800474930
-        },
-        "41": {
-            "id": 1,
-            "name": "kastum shim",
-            "image": "/sub_category/Screenshot_from_2023-06-07_19-04-13.png",
-            "category": 1,
-            "chat_id": 5503011861
-        },
-        "42": {
-            "id": 3,
-            "name": "ko'ylaklar",
-            "image": "/sub_category/Screenshot_from_2023-06-07_19-04-13_9ZETUgT.png",
-            "category": 1,
-            "chat_id": 5503011861
-        },
-        "43": {
-            "id": 4,
-            "name": "ayollar sumkasi",
-            "image": "/sub_category/newpython.png",
-            "category": 2,
-            "chat_id": 5503011861
-        },
-        "44": {
-            "id": 5,
-            "name": "ayollar kyimi",
-            "image": "/sub_category/Screenshot_from_2023-06-07_16-21-20.png",
-            "category": 2,
-            "chat_id": 5503011861
-        },
-        "45": {
-            "id": 6,
-            "name": "ayol byuk 111",
-            "image": "/sub_category/Screenshot_from_2023-06-07_16-21-20_UddTF5r.png",
-            "category": 2,
-            "chat_id": 5503011861
-        },
-        "46": {
-            "id": 7,
-            "name": "ayollar sovuni",
-            "image": "/sub_category/tinydbnew.png",
-            "category": 3,
-            "chat_id": 5503011861
-        },
-        "47": {
-            "id": 8,
-            "name": "erkaklar sovunlari",
-            "image": "/sub_category/newpython_sXeo6v0.png",
-            "category": 3,
-            "chat_id": 5503011861
-        }
-    },
-    "products": {
-        "26": {
-            "id": 1,
-            "name": "etaliyan kastumi",
-            "discription": "asfd a",
-            "image": "/product/Screenshot_from_2023-06-07_19-04-13.png",
-            "price": 54546,
-            "sub_category": 1,
-            "category": 1,
-            "chat_id": 1800474930
-        },
-        "27": {
-            "id": 2,
-            "name": "turitski",
-            "discription": "alksjfljafsd l;kjasdlfkj",
-            "image": "/product/Screenshot_from_2023-06-07_19-04-13_OabqWS1.png",
-            "price": 654613,
-            "sub_category": 1,
-            "category": 1,
-            "chat_id": 1800474930
-        },
         "28": {
-            "id": 3,
-            "name": "ayol byuk",
-            "discription": "vxzlkjcv",
-            "image": "/product/tinydbnew.png",
-            "price": 3452,
-            "sub_category": 5,
-            "category": 2,
-            "chat_id": 1800474930
+            "id": 1,
+            "name": "erkaklar fo'dbolkasi",
+            "image": "/category/Screenshot_from_2023-06-07_19-04-13.png",
+            "chat_id": 5503011861
         },
         "29": {
-            "id": 4,
-            "name": "kir sovun",
-            "discription": "sadfjwe",
-            "image": "/product/git2.png",
-            "price": 5000,
-            "sub_category": 7,
-            "category": 3,
-            "chat_id": 1800474930
+            "id": 2,
+            "name": "ayollay kyimlari",
+            "image": "/category/Screenshot_from_2023-06-07_19-04-13_Fwr0Rwo.png",
+            "chat_id": 5503011861
         },
         "30": {
-            "id": 5,
-            "name": "atr sovun",
-            "discription": "asdf3q4wrf",
-            "image": "/product/bor.jpeg",
-            "price": 234,
-            "sub_category": 7,
-            "category": 3,
-            "chat_id": 1800474930
+            "id": 3,
+            "name": "sovun",
+            "image": "/category/git2.png",
+            "chat_id": 5503011861
         },
         "31": {
             "id": 1,
+            "name": "erkaklar fo'dbolkasi",
+            "image": "/category/Screenshot_from_2023-06-07_19-04-13.png",
+            "chat_id": 1800474930
+        },
+        "32": {
+            "id": 2,
+            "name": "ayollay kyimlari",
+            "image": "/category/Screenshot_from_2023-06-07_19-04-13_Fwr0Rwo.png",
+            "chat_id": 1800474930
+        },
+        "33": {
+            "id": 3,
+            "name": "sovun",
+            "image": "/category/git2.png",
+            "chat_id": 1800474930
+        }
+    },
+    "sub_categories": {
+        "62": {
+            "id": 1,
+            "name": "kastum shim",
+            "image": "/sub_category/Screenshot_from_2023-06-07_19-04-13.png",
+            "category": 1,
+            "chat_id": 5503011861
+        },
+        "63": {
+            "id": 3,
+            "name": "ko'ylaklar",
+            "image": "/sub_category/Screenshot_from_2023-06-07_19-04-13_9ZETUgT.png",
+            "category": 1,
+            "chat_id": 5503011861
+        },
+        "64": {
+            "id": 4,
+            "name": "ayollar sumkasi",
+            "image": "/sub_category/newpython.png",
+            "category": 2,
+            "chat_id": 5503011861
+        },
+        "65": {
+            "id": 5,
+            "name": "ayollar kyimi",
+            "image": "/sub_category/Screenshot_from_2023-06-07_16-21-20.png",
+            "category": 2,
+            "chat_id": 5503011861
+        },
+        "66": {
+            "id": 6,
+            "name": "ayol byuk 111",
+            "image": "/sub_category/Screenshot_from_2023-06-07_16-21-20_UddTF5r.png",
+            "category": 2,
+            "chat_id": 5503011861
+        },
+        "67": {
+            "id": 7,
+            "name": "ayollar sovuni",
+            "image": "/sub_category/tinydbnew.png",
+            "category": 3,
+            "chat_id": 5503011861
+        },
+        "68": {
+            "id": 8,
+            "name": "erkaklar sovunlari",
+            "image": "/sub_category/newpython_sXeo6v0.png",
+            "category": 3,
+            "chat_id": 5503011861
+        },
+        "69": {
+            "id": 1,
+            "name": "kastum shim",
+            "image": "/sub_category/Screenshot_from_2023-06-07_19-04-13.png",
+            "category": 1,
+            "chat_id": 1800474930
+        },
+        "70": {
+            "id": 3,
+            "name": "ko'ylaklar",
+            "image": "/sub_category/Screenshot_from_2023-06-07_19-04-13_9ZETUgT.png",
+            "category": 1,
+            "chat_id": 1800474930
+        },
+        "71": {
+            "id": 4,
+            "name": "ayollar sumkasi",
+            "image": "/sub_category/newpython.png",
+            "category": 2,
+            "chat_id": 1800474930
+        },
+        "72": {
+            "id": 5,
+            "name": "ayollar kyimi",
+            "image": "/sub_category/Screenshot_from_2023-06-07_16-21-20.png",
+            "category": 2,
+            "chat_id": 1800474930
+        },
+        "73": {
+            "id": 6,
+            "name": "ayol byuk 111",
+            "image": "/sub_category/Screenshot_from_2023-06-07_16-21-20_UddTF5r.png",
+            "category": 2,
+            "chat_id": 1800474930
+        },
+        "74": {
+            "id": 7,
+            "name": "ayollar sovuni",
+            "image": "/sub_category/tinydbnew.png",
+            "category": 3,
+            "chat_id": 1800474930
+        },
+        "75": {
+            "id": 8,
+            "name": "erkaklar sovunlari",
+            "image": "/sub_category/newpython_sXeo6v0.png",
+            "category": 3,
+            "chat_id": 1800474930
+        }
+    },
+    "products": {
+        "46": {
+            "id": 1,
             "name": "etaliyan kastumi",
             "discription": "asfd a",
             "image": "/product/Screenshot_from_2023-06-07_19-04-13.png",
@@ -198,7 +148,7 @@
             "category": 1,
             "chat_id": 5503011861
         },
-        "32": {
+        "47": {
             "id": 2,
             "name": "turitski",
             "discription": "alksjfljafsd l;kjasdlfkj",
@@ -208,7 +158,7 @@
             "category": 1,
             "chat_id": 5503011861
         },
-        "33": {
+        "48": {
             "id": 3,
             "name": "ayol byuk",
             "discription": "vxzlkjcv",
@@ -218,7 +168,7 @@
             "category": 2,
             "chat_id": 5503011861
         },
-        "34": {
+        "49": {
             "id": 4,
             "name": "kir sovun",
             "discription": "sadfjwe",
@@ -228,7 +178,7 @@
             "category": 3,
             "chat_id": 5503011861
         },
-        "35": {
+        "50": {
             "id": 5,
             "name": "atr sovun",
             "discription": "asdf3q4wrf",
@@ -237,22 +187,57 @@
             "sub_category": 7,
             "category": 3,
             "chat_id": 5503011861
+        },
+        "51": {
+            "id": 1,
+            "name": "etaliyan kastumi",
+            "discription": "asfd a",
+            "image": "/product/Screenshot_from_2023-06-07_19-04-13.png",
+            "price": 54546,
+            "sub_category": 1,
+            "category": 1,
+            "chat_id": 1800474930
+        },
+        "52": {
+            "id": 2,
+            "name": "turitski",
+            "discription": "alksjfljafsd l;kjasdlfkj",
+            "image": "/product/Screenshot_from_2023-06-07_19-04-13_OabqWS1.png",
+            "price": 654613,
+            "sub_category": 1,
+            "category": 1,
+            "chat_id": 1800474930
+        },
+        "53": {
+            "id": 3,
+            "name": "ayol byuk",
+            "discription": "vxzlkjcv",
+            "image": "/product/tinydbnew.png",
+            "price": 3452,
+            "sub_category": 5,
+            "category": 2,
+            "chat_id": 1800474930
+        },
+        "54": {
+            "id": 4,
+            "name": "kir sovun",
+            "discription": "sadfjwe",
+            "image": "/product/git2.png",
+            "price": 5000,
+            "sub_category": 7,
+            "category": 3,
+            "chat_id": 1800474930
+        },
+        "55": {
+            "id": 5,
+            "name": "atr sovun",
+            "discription": "asdf3q4wrf",
+            "image": "/product/bor.jpeg",
+            "price": 234,
+            "sub_category": 7,
+            "category": 3,
+            "chat_id": 1800474930
         }
     },
-    "carts": {
-        "1": {
-            "chat_id": 5503011861,
-            "product": 5,
-            "count": 2,
-            "phone": "+998976697277",
-            "user": 16
-        },
-        "2": {
-            "chat_id": 5503011861,
-            "product": 1,
-            "count": 12,
-            "phone": "+998976697277",
-            "user": 16
-        }
-    }
+    "carts": {}
 }

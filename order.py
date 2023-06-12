@@ -29,9 +29,13 @@ class Order:
             user = db.get_user(chat_id=chat_id)['data']
 
             text = f'📝 Zakazlarim\n\n'
-            text += f'👤 Foydalanuvchi: {user["name"]}\n\n'
-            text += f"👤 Username: @{user['username']}\n\n"
-            text += f'📞 Telefon raqam: {user["phone"]}\n\n'
+            text += f'👤 Username: @{user["username"]}\n'
+            text += f'👤 Ism: {user["first_name"]}\n'
+            text += f'👤 Familiya: {user["last_name"]}\n'
+            text += f'📞 Telefon raqam: {user["phone"]}\n'
+            text += f'📍 Manzil: {user["address"]}\n\n'
+
+
             text += f'📦 Buyurtmalar:\n\n'
 
             orders = db.get_orders(chat_id=chat_id)['data']
@@ -61,7 +65,7 @@ class Order:
             text = '📦 Siz hali buyurtma bermagansiz\n\n'
             text += '❗️ Yoki siz ro\'yxatdan o\'tmagansiz\n\n'
             text += '🔐 Ro\'yxatdan o\'tish tugmasini bosing'
-            bot.send_message(chat_id=chat_id, text='📦 Siz hali buyurtma bermagansiz')
+            bot.send_message(chat_id=chat_id, text=text)
 
     def get_information(self, update: Update, context: CallbackContext):
         bot = context.bot
@@ -92,10 +96,11 @@ class Order:
                 text += f'📦 Buyurtma yuborilgan🆗\n\n'
             else:
                 text += f'📦 Buyurtma yuborilmagan🚫\n\n'
-            text += f'🆔 Buyurtma id: {order["id"]}\n'
-            text += f'👤 Foydalanuvchi: {user["name"]}\n'
-            text += f"👤 Username: @{user['username']}\n"
+            text += f'👤 Username: @{user["username"]}\n'
+            text += f'👤 Ism: {user["first_name"]}\n'
+            text += f'👤 Familiya: {user["last_name"]}\n'
             text += f'📞 Telefon raqam: {user["phone"]}\n'
+            text += f'📍 Manzil: {user["address"]}\n\n'
             text += f'📦 Buyurtma:\n\n'
             text += f'🧩 {product["name"]}\n'
             text += f'💵 Narxi: {product["price"]} so\'m\n'
@@ -133,10 +138,11 @@ class Order:
             user = db.get_user(chat_id=chat_id)['data']
 
             text = f'📝 Kelgan zakazlar\n\n'
-            text += f'👤 Foydalanuvchi: {user["name"]}\n\n'
-            text += f"👤 Username: @{user['username']}\n\n"
-            text += f'📞 Telefon raqam: {user["phone"]}\n\n'
-            text += f'📦 Buyurtmalar:\n\n'
+            text += f'👤 Username: @{user["username"]}\n'
+            text += f'👤 Ism: {user["first_name"]}\n'
+            text += f'👤 Familiya: {user["last_name"]}\n'
+            text += f'📞 Telefon raqam: {user["phone"]}\n'
+            text += f'📍 Manzil: {user["address"]}\n\n'
 
             orders = db.get_orders(chat_id=chat_id)['data']
 
@@ -181,10 +187,11 @@ class Order:
             user = db.get_user(chat_id=chat_id)['data']
 
             text = f'📝 Kelgan zakazlar\n\n'
-            text += f'👤 Foydalanuvchi: {user["name"]}\n\n'
-            text += f"👤 Username: @{user['username']}\n\n"
-            text += f'📞 Telefon raqam: {user["phone"]}\n\n'
-            text += f'📦 Buyurtmalar:\n\n'
+            text += f'👤 Username: @{user["username"]}\n'
+            text += f'👤 Ism: {user["first_name"]}\n'
+            text += f'👤 Familiya: {user["last_name"]}\n'
+            text += f'📞 Telefon raqam: {user["phone"]}\n'
+            text += f'📍 Manzil: {user["address"]}\n\n'
 
             orders = db.get_orders(chat_id=chat_id)['data']
 
@@ -235,10 +242,14 @@ class Order:
 
                 for order in orders:
                     if order['status']:
+                        user = order['user']
                         text += f'🆔 Buyurtma id: {order["id"]}\n'
-                        text += f'👤 Foydalanuvchi: {order["user"]["name"]}\n'
-                        text += f"👤 Username: @{order['user']['username']}\n"
-                        text += f'📞 Telefon raqam: {order["user"]["phone"]}\n'
+                        text += f'👤 Username: @{[user]["username"]}\n'
+                        text += f'👤 Ism: {user["first_name"]}\n'
+                        text += f'👤 Familiya: {user["last_name"]}\n'
+                        text += f'📞 Telefon raqam: {user["phone"]}\n'
+                        text += f'📍 Manzil: {user["address"]}\n\n'
+
                         text += f'🧩 {order["product"]["name"]}\n'
                         text += f'💵 Narxi: {order["product"]["price"]} so\'m\n'
                         text += f'🧮 Soni: {order["count"]} ta\n'
@@ -277,9 +288,12 @@ class Order:
                 for order in orders:
                     if not order['status']:
                         text += f'🆔 Buyurtma id: {order["id"]}\n'
-                        text += f'👤 Foydalanuvchi: {order["user"]["name"]}\n'
-                        text += f"👤 Username: @{order['user']['username']}\n"
-                        text += f'📞 Telefon raqam: {order["user"]["phone"]}\n'
+                        user = order['user']
+                        text += f'👤 Username: @{user["username"]}\n'
+                        text += f'👤 Ism: {user["first_name"]}\n'
+                        text += f'👤 Familiya: {user["last_name"]}\n'
+                        text += f'📞 Telefon raqam: {user["phone"]}\n'
+                        text += f'📍 Manzil: {user["address"]}\n\n'
                         text += f'🧩 {order["product"]["name"]}\n'
                         text += f'💵 Narxi: {order["product"]["price"]} so\'m\n'
                         text += f'🧮 Soni: {order["count"]} ta\n'
