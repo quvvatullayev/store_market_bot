@@ -83,13 +83,15 @@ class DB:
             data = self.products.search((User.id == max_id[-1]['id']) & (User.sub_category == sub_category_id) & (User.chat_id == chat_id))
         return data
 
-    def add_user(self, username, name, chat_id, phone_number=11):
+    def add_user(self, username, first_name, last_name, chat_id, phone, address):
         user_data = {
-            'username': username,
-            'name': name,
-            'chat_id': chat_id,
-            'phone': phone_number
-        }
+                "username": username,
+                "first_name": first_name,
+                "last_name": last_name,
+                "chat_id": chat_id,
+                "phone": phone,
+                "address": address
+            }
 
         user = requests.post(base_url + 'add-user/', data=user_data)
         return user.json()

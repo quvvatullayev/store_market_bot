@@ -5,6 +5,8 @@ from user import UserClass
 from cart import Cart
 from order import Order
 from contact import Contact
+from user_aouth import Auth_bot
+
 
 TOKEN = '5699418530:AAF-rw_GFSO_DeL-19T4s2eiGDXLk6OSTIg'
 
@@ -14,6 +16,8 @@ user = UserClass()
 cart = Cart()
 order = Order()
 contact = Contact()
+bot = Auth_bot()
+
 
 updater = Updater(token=TOKEN, use_context=True)
 dispatcher = updater.dispatcher
@@ -22,7 +26,7 @@ dispatcher = updater.dispatcher
 dispatcher.add_handler(CommandHandler('start', shop.start))
 dispatcher.add_handler(MessageHandler(Filters.text('📦 katalog'), katalog.katalog))
 dispatcher.add_handler(MessageHandler(Filters.text('🛒 karzinka'), cart.cart))
-dispatcher.add_handler(MessageHandler(Filters.text("🔐 ro'yxatdan o'tish"), user.get_login))
+# dispatcher.add_handler(MessageHandler(Filters.text("🔐 ro'yxatdan o'tish"), user.get_login))
 dispatcher.add_handler(MessageHandler(Filters.text('👤 profil'), user.profil))
 dispatcher.add_handler(MessageHandler(Filters.text("🏠 Bosh sahifa"), shop.start))
 dispatcher.add_handler(MessageHandler(Filters.text("📝 zakazlarim"), order.get_order))
@@ -49,7 +53,11 @@ dispatcher.add_handler(CallbackQueryHandler(cart.order, pattern='order_'))
 dispatcher.add_handler(MessageHandler(Filters.regex(r'^\d+u$'), order.edit_order))
 dispatcher.add_handler(MessageHandler(Filters.regex(r'^\d+U$'), order.edit_order))
 dispatcher.add_handler(MessageHandler(Filters.regex(r'^\d+t$'), order.get_order_by_id))
-dispatcher.add_handler(MessageHandler(Filters.text, cart.count_cart))
+dispatcher.add_handler(MessageHandler(Filters.regex(r'^\d+$'), cart.count_cart))
+dispatcher.add_handler(MessageHandler(Filters.text("🔐 ro'yxatdan o'tish"), bot.auth_user))
+dispatcher.add_handler(MessageHandler(Filters.text, bot.auth_user))
+dispatcher.add_handler(CallbackQueryHandler(bot.yes, pattern='yes'))
+dispatcher.add_handler(CallbackQueryHandler(bot.no, pattern='no'))
 
 updater.start_polling()
 updater.idle()
