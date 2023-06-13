@@ -8,6 +8,7 @@ from user import UserClass
 from cart import Cart
 from order import Order
 from contact import Contact
+from user_aouth import Auth_bot
 
 
 TOKEN = '5677023630:AAGdskZAvZwdRix213Ho28QaN-NZVcQtuU8'
@@ -21,6 +22,7 @@ user = UserClass()
 cart = Cart()
 order = Order()
 contact = Contact()
+bot = Auth_bot()
 
 
 @app.route('/', methods=['POST'])
