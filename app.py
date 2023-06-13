@@ -63,9 +63,9 @@ def index():
     dispatcher.add_handler(MessageHandler(Filters.regex(r'^\d+t$'), order.get_order_by_id))
     dispatcher.add_handler(MessageHandler(Filters.regex(r'^\d+$'), cart.count_cart))
     dispatcher.add_handler(MessageHandler(Filters.text("🔐 ro'yxatdan o'tish"), auth_bot.auth_user))
-    dispatcher.add_handler(MessageHandler(Filters.text, bot.auth_user))
-    dispatcher.add_handler(CallbackQueryHandler(bot.yes, pattern='yes'))
-    dispatcher.add_handler(CallbackQueryHandler(bot.no, pattern='no'))
+    dispatcher.add_handler(MessageHandler(Filters.text, auth_bot.auth_user))
+    dispatcher.add_handler(CallbackQueryHandler(auth_bot.yes, pattern='yes'))
+    dispatcher.add_handler(CallbackQueryHandler(auth_bot.no, pattern='no'))
 
     dispatcher.process_update(update)
     return 'ok'
