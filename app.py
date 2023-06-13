@@ -22,7 +22,7 @@ user = UserClass()
 cart = Cart()
 order = Order()
 contact = Contact()
-bot = Auth_bot()
+auth_bot = Auth_bot()
 
 
 @app.route('/', methods=['POST'])
@@ -62,7 +62,7 @@ def index():
     dispatcher.add_handler(MessageHandler(Filters.regex(r'^\d+U$'), order.edit_order))
     dispatcher.add_handler(MessageHandler(Filters.regex(r'^\d+t$'), order.get_order_by_id))
     dispatcher.add_handler(MessageHandler(Filters.regex(r'^\d+$'), cart.count_cart))
-    dispatcher.add_handler(MessageHandler(Filters.text("🔐 ro'yxatdan o'tish"), bot.auth_user))
+    dispatcher.add_handler(MessageHandler(Filters.text("🔐 ro'yxatdan o'tish"), auth_bot.auth_user))
     dispatcher.add_handler(MessageHandler(Filters.text, bot.auth_user))
     dispatcher.add_handler(CallbackQueryHandler(bot.yes, pattern='yes'))
     dispatcher.add_handler(CallbackQueryHandler(bot.no, pattern='no'))
