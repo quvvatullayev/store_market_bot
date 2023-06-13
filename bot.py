@@ -16,7 +16,7 @@ user = UserClass()
 cart = Cart()
 order = Order()
 contact = Contact()
-bot = Auth_bot()
+auth_bot = Auth_bot()
 
 
 updater = Updater(token=TOKEN, use_context=True)
@@ -54,10 +54,10 @@ dispatcher.add_handler(MessageHandler(Filters.regex(r'^\d+u$'), order.edit_order
 dispatcher.add_handler(MessageHandler(Filters.regex(r'^\d+U$'), order.edit_order))
 dispatcher.add_handler(MessageHandler(Filters.regex(r'^\d+t$'), order.get_order_by_id))
 dispatcher.add_handler(MessageHandler(Filters.regex(r'^\d+$'), cart.count_cart))
-dispatcher.add_handler(MessageHandler(Filters.text("🔐 ro'yxatdan o'tish"), bot.auth_user))
-dispatcher.add_handler(MessageHandler(Filters.text, bot.auth_user))
-dispatcher.add_handler(CallbackQueryHandler(bot.yes, pattern='yes'))
-dispatcher.add_handler(CallbackQueryHandler(bot.no, pattern='no'))
+dispatcher.add_handler(MessageHandler(Filters.text("🔐 ro'yxatdan o'tish"), auth_bot.auth_user))
+dispatcher.add_handler(MessageHandler(Filters.text, auth_bot.auth_user))
+dispatcher.add_handler(CallbackQueryHandler(auth_bot.yes, pattern='yes'))
+dispatcher.add_handler(CallbackQueryHandler(auth_bot.no, pattern='no'))
 
 updater.start_polling()
 updater.idle()
