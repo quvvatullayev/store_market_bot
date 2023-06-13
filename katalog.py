@@ -123,8 +123,8 @@ class Katalog:
         name = product['name']
         price = '{:,.0f}'.format(product['price'])
         discription = product['discription']
-
-        caption = f"📦 Nomi: {name}\n💰 Narxi: {'{:,.0f}'.format(price)}\n📝 Ta'rif: {discription}"
+    
+        caption = f"📦 Nomi: {name}\n💰 Narxi: {price}\n📝 Ta'rif: {discription}"
         inline_keyboard = [
             [
                 InlineKeyboardButton('⬅️ Orqaga', callback_data=f"backe_{sub_category_id}_{product['id']}"),
