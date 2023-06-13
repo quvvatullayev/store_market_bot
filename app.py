@@ -33,7 +33,6 @@ def index():
     dispatcher.add_handler(CommandHandler('start', shop.start))
     dispatcher.add_handler(MessageHandler(Filters.text('📦 katalog'), katalog.katalog))
     dispatcher.add_handler(MessageHandler(Filters.text('🛒 karzinka'), cart.cart))
-    # dispatcher.add_handler(MessageHandler(Filters.text("🔐 ro'yxatdan o'tish"), user.get_login))
     dispatcher.add_handler(MessageHandler(Filters.text('👤 profil'), user.profil))
     dispatcher.add_handler(MessageHandler(Filters.text("🏠 Bosh sahifa"), shop.start))
     dispatcher.add_handler(MessageHandler(Filters.text("📝 zakazlarim"), order.get_order))
