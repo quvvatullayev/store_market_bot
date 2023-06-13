@@ -9,6 +9,7 @@ from telegram import (
 from telegram.ext import CallbackContext
 from db import DB
 from main import Shop
+from pprint import pprint
 
 shop = Shop()
 db = DB('db.json')
@@ -253,14 +254,13 @@ class Order:
 
                 for order in orders:
                     if order['status']:
-                        user = order['user']
                         text += f'🆔 Buyurtma id: {order["id"]}\n'
-                        text += f'👤 Username: @{[user]["username"]}\n'
+                        user = order['user']
+                        text += f'👤 Username: @{user["username"]}\n'
                         text += f'👤 Ism: {user["first_name"]}\n'
                         text += f'👤 Familiya: {user["last_name"]}\n'
                         text += f'📞 Telefon raqam: {user["phone"]}\n'
                         text += f'📍 Manzil: {user["address"]}\n\n'
-
                         text += f'🧩 {order["product"]["name"]}\n'
                         price = '{:,.0f}'.format(order["product"]["price"])
                         text += f'💵 Narxi: {price} so\'m\n'
@@ -275,7 +275,8 @@ class Order:
                 text += '📦 Hali brorta buyurtma yuborilmagan'
 
             keyboard = [
-                [KeyboardButton('📝 Buyurtma informations'), KeyboardButton('🏠 Bosh sahifa')],
+                [KeyboardButton('📝 Buyurtma informations'), KeyboardButton('✏️ Buyurtmalarni taxrirlash')],
+                [KeyboardButton('🏠 Bosh sahifa')],
             ]
             reply_markup = ReplyKeyboardMarkup(keyboard=keyboard, resize_keyboard=True)
             bot.send_message(chat_id=chat_id, text=text, reply_markup=reply_markup)

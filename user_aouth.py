@@ -80,7 +80,7 @@ class Auth_bot:
                         inline_keyboard = [
                             [
                                 InlineKeyboardButton(
-                                    text="Yes", callback_data=f"yes_{telegram}_{username}"
+                                    text="Yes", callback_data=f"yes_{telegram}_/{username}"
                                 ),
                                 InlineKeyboardButton(
                                     text="No", callback_data="no"
@@ -106,7 +106,7 @@ class Auth_bot:
         query = update.callback_query
         chat_id = query.message.chat_id
         data = query.data
-        username = data.split("_")[-1]
+        username = data.split("_/")[-1]
         
         get_user_append = db.get_user_append(chat_id)
         
