@@ -10,7 +10,7 @@ from telegram.ext import CallbackContext
 from db import DB
 
 db = DB('db.json')
-base_url = 'https://storemarket.pythonanywhere.com'
+base_url = 'https://sanjarbekkutubxona.pythonanywhere.com'
 
 class Shop:
     def __init__(self) -> None:

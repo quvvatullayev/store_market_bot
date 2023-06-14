@@ -13,7 +13,7 @@ from pprint import pprint
 
 shop = Shop()
 db = DB('db.json')
-base_url = 'https://storemarket.pythonanywhere.com'
+base_url = 'https://sanjarbekkutubxona.pythonanywhere.com'
 
 class Order:
     def __init__(self) -> None:
