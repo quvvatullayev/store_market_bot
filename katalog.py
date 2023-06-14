@@ -45,6 +45,10 @@ class Katalog:
         for sub_category in data_sub_categories:
             inline_keyboard.append([InlineKeyboardButton(sub_category['name'], callback_data=f"sub_category_{sub_category['id']}")])
         
+        if inline_keyboard == []:
+            text = 'Kategoriyada mahsulotlar yo\'q'
+            query.bot.edit_message_text(text=text, chat_id=chat_id, message_id=query.message.message_id)
+            return
         text = 'Kategoriya tanlang'
         reply_markup = InlineKeyboardMarkup(inline_keyboard)
         query.edit_message_text(text=text, reply_markup=reply_markup)
@@ -60,7 +64,11 @@ class Katalog:
 
         data_products = db.get_products(chat_id=chat_id, sub_category_id=sub_category_id)
         
-        # products carusel
+        if data_products == []:
+            text = 'Kategoriyada mahsulotlar yo\'q'
+            query.bot.edit_message_text(text=text, chat_id=chat_id, message_id=query.message.message_id)
+            return
+
         for product in data_products:
             image = base_url + product['image']
             name = product['name']
