@@ -20,9 +20,9 @@ class DB:
         request = requests.get(base_url + 'start/')
         data = request.json()
         for category in data['result']:
-            self.categories.insert({'id': category['id'], 'name': category['name'], 'image': category['image'], "chat_id":int(chat_id)})
+            self.categories.insert({'id': category['id'], 'name': category['name'], "chat_id":int(chat_id)})
             for sub_category in category['sub_category']:
-                self.sub_categories.insert({'id': sub_category['id'], 'name': sub_category['name'], 'image': sub_category['image'], 'category': category['id'], "chat_id":int(chat_id)})
+                self.sub_categories.insert({'id': sub_category['id'], 'name': sub_category['name'], 'category': category['id'], "chat_id":int(chat_id)})
                 for product in sub_category['products']:
                     self.products.insert({'id': product['id'], 'name': product['name'],'discription': product['discription'], 'image': product['image'], 'price': product['price'], 'sub_category': sub_category['id'], 'category':category['id'], "chat_id":int(chat_id)})
         return data
@@ -67,6 +67,10 @@ class DB:
         User = Query()
         data = self.products.search((User.sub_category == sub_category_id) & (User.chat_id == chat_id))
         return data
+    
+    def get_product_id(self, product_id):
+        product = requests.get(base_url+f'get-product/{product_id}/')
+        return product.json()
     
     def get_next_product(self, product_id, chat_id, sub_category_id):
         User = Query()

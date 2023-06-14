@@ -148,25 +148,35 @@ class Katalog:
         query = update.callback_query
         data = query.data.split('_')
         product_id = int(data[-1])
+        sub_category_id = int(data[-2])
         chat_id = query.message.chat_id
 
         try:
             text = 'Iltooms kuting ...'
-            query.bot.edit_message_reply_markup(reply_markup=None, chat_id=chat_id, message_id=query.message.message_id)
-            query.bot.send_message(chat_id=chat_id, text=text)
-            get_user = db.get_user(chat_id=chat_id)
+            
+            try:
+                get_product = db.get_product_id(product_id=product_id)
 
-            user_id = get_user['data']['id']
-            phone = get_user['data']['phone']
+                query.bot.edit_message_reply_markup(reply_markup=None, chat_id=chat_id, message_id=query.message.message_id)
+                query.bot.send_message(chat_id=chat_id, text=text)
+                get_user = db.get_user(chat_id=chat_id)
+
+                user_id = get_user['data']['id']
+                phone = get_user['data']['phone']
 
 
-            db.add_cart(chat_id=chat_id, product_id=product_id, count=0, phone=phone, user_id=user_id)
+                db.add_cart(chat_id=chat_id, product_id=product_id, count=0, phone=phone, user_id=user_id)
 
-            text = "Bu mahsulotdan nechta olasiz❔\n\n"
-            text += 'Sonini kriting masalan:\n\n'
-            text += 'soni:100'
+                text = "Bu mahsulotdan nechta olasiz❔\n\n"
+                text += 'Sonini kriting masalan:\n\n'
+                text += 'soni:100'
 
-            query.bot.send_message(chat_id=chat_id, text=text)
+                query.bot.send_message(chat_id=chat_id, text=text)
+
+            except:
+                text = 'Bu mahsulot soni tugadi❗️\n\n'
+                text += 'Iltimos qayta urinib ko\'ring❗️'
+                query.bot.send_message(chat_id=chat_id, text=text)
         
         except:
 
