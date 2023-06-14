@@ -74,6 +74,7 @@ class Cart:
 
         data_cart = db.get_cart(chat_id=chat_id)
 
+
         if len(data_cart) == 0:
             text = '📭 Savat bo\'sh\n\n'
             
