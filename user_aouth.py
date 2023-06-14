@@ -1,5 +1,6 @@
 from telegram import Update, ReplyKeyboardMarkup, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import CallbackContext
+import re
 from user_db import DB
 from db import DB as Base_db
 
@@ -50,6 +51,11 @@ class Auth_bot:
                             update.message.reply_text(
                                 'Iltimos, ismingizni 📝\n\nNamuna: Muhammad'
                             )
+                    elif text == '✏️ Profelni taxrirlash':
+                        db.user_append(chat_id)
+                        update.message.reply_text(
+                            'Iltimos, ismingizni 📝\n\nNamuna: Muhammad'
+                        )
                 
                     elif get_append.get("name") == None:
                         db.user_append(chat_id, name=text, telegram=telegram)
@@ -62,10 +68,18 @@ class Auth_bot:
                             'Telefon raqamingizni kiriting📲\n\nNamuna: +998 99 999 99 99'
                         )
                     elif get_append.get("phone") == None:
-                        db.user_append(chat_id, phone=text)
-                        update.message.reply_text(
-                            'Yashash manzilingizni kiriting(shahar yoki tuman)📍\n\nNamuna: Toshkent shahar'
-                        )
+                        pattern = r'\+998\s?\d{2}\s?\d{3}\s?\d{2}\s?\d{2}'
+                        telefonlar = re.findall(pattern, text)
+                        if telefonlar:
+                            db.user_append(chat_id, phone=text)
+                            update.message.reply_text(
+                                'Yashash manzilingizni kiriting(shahar yoki tuman)📍\n\nNamuna: Toshkent shahar'
+                            )
+                        else:
+                            update.message.reply_text(
+                                'Telefon raqamingizni noto\'g\'ri kiritdingiz❌\n\nNamuna: +998 99 999 99 99'
+                            )
+
                     elif get_append.get("area") == None:
                         db.user_append(chat_id, area=text)
 
@@ -137,3 +151,16 @@ class Auth_bot:
         query.message.reply_text(
             'Iltimos, ro\'yxatdan o\'tish uchun\n pasdagi tugmani bosing👇'
         )
+
+    def edit_user(self, update: Update, context: CallbackContext):
+        chat_id = update.message.chat_id
+        base_db.delete_user(chat_id)
+        self.auth_user(update=update, context=context)
+
+    def logout(self, update: Update, context: CallbackContext):
+        chat_id = update.message.chat_id
+        base_db.delete_user(chat_id)
+        update.message.reply_text(
+            'Siz muvaffaqiyatli chiqdingiz✅'
+        )
+        self.auth_user(update=update, context=context)

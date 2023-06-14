@@ -64,8 +64,11 @@ class UserClass:
             text += f'📞 Telefon raqam: {user["phone"]}\n'
             text += f'📍 Manzil: {user["address"]}\n\n'
 
-            
-            reply_markup = ReplyKeyboardMarkup([[KeyboardButton('📝 zakazlarim'), KeyboardButton('🏠 Bosh sahifa')]], resize_keyboard=True)
+            keyboard = [
+                ['📝 zakazlarim', '✏️ Profelni taxrirlash'],
+                ['📤 profelni tark etish','🏠 Bosh sahifa']
+            ]
+            reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
             bot.send_message(chat_id=chat_id, text=text, reply_markup=reply_markup)
         except:
             text = '❗️ Siz ro\'yxatdan o\'tmagansiz\n\n'
