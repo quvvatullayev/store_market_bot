@@ -90,10 +90,10 @@ class UserClass:
                 text += f'👤 Familiya: {user["last_name"]}\n'
                 text += f'📞 Telefon raqam: {user["phone"]}\n'
                 text += f'📍 Manzil: {user["address"]}\n\n'
-                text += f'📦 Buyurtma: {order["product"]["name"]}so\'m\n'
+                text += f'📦 Buyurtma: {order["product"]["name"]}\n'
                 text += f'📦 Buyurtma soni: {order["count"]}\n'
                 price = '{:,.0f}'.format(order["product"]["price"])
-                text += f'📦 Buyurtma narxi: {price}\n'
+                text += f'📦 Buyurtma narxi: {price}so\'m\n'
                 count = '{:,.0f}'.format(order["product"]["price"] * order["count"])
                 text += f'📦 Buyurtma umumiy narxi: {count}so\'m\n\n'
 
