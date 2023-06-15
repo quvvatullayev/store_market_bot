@@ -8,7 +8,7 @@ from contact import Contact
 from user_aouth import Auth_bot
 
 
-TOKEN = '6275454190:AAHyJAEj4WZYf_R7Zn5XqBgQw9Cjrs-QQz4'
+TOKEN = '5677023630:AAHkbfD1-l1RWMw7Q56_wBQKR4XzHXunVjs'
 
 shop = Shop()
 katalog = Katalog()
