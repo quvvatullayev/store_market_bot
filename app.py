@@ -11,7 +11,7 @@ from contact import Contact
 from user_aouth import Auth_bot
 
 
-TOKEN = '5677023630:AAGdskZAvZwdRix213Ho28QaN-NZVcQtuU8'
+TOKEN = '5677023630:AAHkbfD1-l1RWMw7Q56_wBQKR4XzHXunVjs'
 
 app = Flask(__name__)
 
