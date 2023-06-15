@@ -4,7 +4,7 @@ from tinydb import TinyDB, Query,where
 from tinydb.database import Document
 from pprint import pprint
 
-base_url = 'https://sanjarbekkutubxona.pythonanywhere.com/shop/'
+base_url = 'https://storemarket.pythonanywhere.com/shop/'
 
 class DB:
     def __init__(self, path):
