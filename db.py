@@ -23,8 +23,10 @@ class DB:
             self.categories.insert({'id': category['id'], 'name': category['name'], "chat_id":int(chat_id)})
             for sub_category in category['sub_category']:
                 self.sub_categories.insert({'id': sub_category['id'], 'name': sub_category['name'], 'category': category['id'], "chat_id":int(chat_id)})
+                count = 1
                 for product in sub_category['products']:
-                    self.products.insert({'id': product['id'], 'name': product['name'],'discription': product['discription'], 'image': product['image'], 'price': product['price'], 'sub_category': sub_category['id'], 'category':category['id'], "chat_id":int(chat_id)})
+                    self.products.insert({'id': product['id'], 'name': product['name'],'discription': product['discription'], 'image': product['image'], 'price': product['price'], 'sub_category': sub_category['id'], 'category':category['id'], "chat_id":int(chat_id), "count": count})
+                    count += 1
         return data
            
     def get_categories(self, chat_id):
@@ -189,22 +191,6 @@ class DB:
             return admin.json()
         else:
             return False
-
-    # when transferring the product, it showed how many products are in the pass and what product it is
-    def get_product_next_count(self, product_id, chat_id, sub_category_id):
-        User = Query()
-        data = self.products.search((User.id > product_id) & (User.sub_category == sub_category_id) & (User.chat_id == chat_id))
-        if len(data) == 0:
-            data = self.products.search((User.id > 0) & (User.sub_category == sub_category_id) & (User.chat_id == chat_id))
-        return len(data)
-
-    def get_product_back_count(self, product_id, chat_id, sub_category_id):
-        User = Query()
-        data = self.products.search((User.id < product_id) & (User.sub_category == sub_category_id) & (User.chat_id == chat_id))
-        if len(data) == 0:
-            max_id = self.products.search((User.sub_category == sub_category_id) & (User.chat_id == chat_id))
-            data = self.products.search((User.id == max_id[-1]['id']) & (User.sub_category == sub_category_id) & (User.chat_id == chat_id))
-        return len(data)
     
     def get_product_count(self, product_id, chat_id, sub_category_id):
         User = Query()
