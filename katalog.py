@@ -85,6 +85,7 @@ class Katalog:
 
         data_products = db.get_products(chat_id=chat_id, sub_category_id=sub_category_id)
         
+        
         if data_products == []:
             text = 'Kategoriyada mahsulotlar yo\'q'
             return
@@ -95,12 +96,18 @@ class Katalog:
             price = product['price']
             discription = product['discription']
             
-            caption = f"📦 Nomi: {name}\n💰 Narxi: {'{:,.0f}'.format(price)}\n📝 Ta'rif: {discription}"
+            caption = f"📦 Nomi: {name}\n💰 Narxi: {'{:,.0f}'.format(price)}\n📝 Ta'rif: {discription}\n\n"
+
+            coun_product = db.get_product_count(chat_id=chat_id, sub_category_id=sub_category_id, product_id=product['id'])
+            coun_next_product = db.get_product_next_count(chat_id=chat_id, sub_category_id=sub_category_id, product_id=product['id'])
+
+            caption += f"                                                     {coun_product} / {coun_next_product}"
+            
             inline_keyboard = [
                 [
-                    InlineKeyboardButton('⬅️ Orqaga', callback_data=f"backe_{sub_category_id}_{product['id']}"),
+                    InlineKeyboardButton('⬅️ Orqaga', callback_data=f"backe_{katalog_id}_{sub_category_id}_{product['id']}"),
                     InlineKeyboardButton('🛒 Savatga qo\'shish', callback_data=f"add_cart_{sub_category_id}_{product['id']}"),
-                    InlineKeyboardButton('➡️ Oldinga', callback_data=f"next_{sub_category_id}_{product['id']}"),
+                    InlineKeyboardButton('➡️ Oldinga', callback_data=f"next_{katalog_id}_{sub_category_id}_{product['id']}"),
                 ],
                 [
                     InlineKeyboardButton('⬅️ Orqaga qaytish', callback_data=f'backe_product_{katalog_id}')
@@ -144,6 +151,7 @@ class Katalog:
         product_id = int(data[-1])
         chat_id = query.message.chat_id
         sub_category_id = int(data[-2])
+        katalog_id = int(data[1])
 
         query.bot.edit_message_reply_markup(reply_markup=None, chat_id=chat_id, message_id=query.message.message_id)
 
@@ -154,12 +162,21 @@ class Katalog:
         price = product['price']
         discription = product['discription']
         
-        caption = f"📦 Nomi: {name}\n💰 Narxi: {'{:,.0f}'.format(price)}\n📝 Ta'rif: {discription}"
+        caption = f"📦 Nomi: {name}\n💰 Narxi: {'{:,.0f}'.format(price)}\n📝 Ta'rif: {discription}\n\n"
+
+        coun_product = db.get_product_count(chat_id=chat_id, sub_category_id=sub_category_id, product_id=product['id'])
+        coun_next_product = db.get_product_next_count(chat_id=chat_id, sub_category_id=sub_category_id, product_id=product['id'])
+
+        caption += f"                                                     {coun_product} / {coun_next_product}"
+
         inline_keyboard = [
             [
-                InlineKeyboardButton('⬅️ Orqaga', callback_data=f"backe_{sub_category_id}_{product['id']}"),
+                InlineKeyboardButton('⬅️ Orqaga', callback_data=f"backe_{katalog_id}_{sub_category_id}_{product['id']}"),
                 InlineKeyboardButton('🛒 Savatga qo\'shish', callback_data=f"add_cart_{sub_category_id}_{product['id']}"),
-                InlineKeyboardButton('➡️ Oldinga', callback_data=f"next_{sub_category_id}_{product['id']}"),
+                InlineKeyboardButton('➡️ Oldinga', callback_data=f"next_{katalog_id}_{sub_category_id}_{product['id']}"),
+            ],
+            [
+                    InlineKeyboardButton('⬅️ Orqaga qaytish', callback_data=f'backe_product_{katalog_id}')
             ]
         ]
         reply_markup = InlineKeyboardMarkup(inline_keyboard)
@@ -172,6 +189,7 @@ class Katalog:
         product_id = int(data[-1])
         chat_id = query.message.chat_id
         sub_category_id = int(data[-2])
+        katalog_id = int(data[1])
 
         query.bot.edit_message_reply_markup(reply_markup=None, chat_id=chat_id, message_id=query.message.message_id)
 
@@ -182,12 +200,19 @@ class Katalog:
         price = '{:,.0f}'.format(product['price'])
         discription = product['discription']
     
-        caption = f"📦 Nomi: {name}\n💰 Narxi: {price}\n📝 Ta'rif: {discription}"
+        caption = f"📦 Nomi: {name}\n💰 Narxi: {price}\n📝 Ta'rif: {discription}\n\n"
+        coun_product = db.get_product_count(chat_id=chat_id, sub_category_id=sub_category_id, product_id=product['id'])
+        coun_next_product = db.get_product_back_count(chat_id=chat_id, sub_category_id=sub_category_id, product_id=product['id'])
+
+        caption += f"                                                     {coun_product} / {coun_next_product}"
         inline_keyboard = [
             [
-                InlineKeyboardButton('⬅️ Orqaga', callback_data=f"backe_{sub_category_id}_{product['id']}"),
+                InlineKeyboardButton('⬅️ Orqaga', callback_data=f"backe_{katalog_id}_{sub_category_id}_{product['id']}"),
                 InlineKeyboardButton('🛒 Savatga qo\'shish', callback_data=f"add_cart_{sub_category_id}_{product['id']}"),
-                InlineKeyboardButton('➡️ Oldinga', callback_data=f"next_{sub_category_id}_{product['id']}"),
+                InlineKeyboardButton('➡️ Oldinga', callback_data=f"next_{katalog_id}_{sub_category_id}_{product['id']}"),
+            ],
+            [
+                InlineKeyboardButton('⬅️ Orqaga qaytish', callback_data=f'backe_product_{katalog_id}')
             ]
         ]
         reply_markup = InlineKeyboardMarkup(inline_keyboard)

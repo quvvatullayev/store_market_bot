@@ -190,6 +190,27 @@ class DB:
         else:
             return False
 
+    # when transferring the product, it showed how many products are in the pass and what product it is
+    def get_product_next_count(self, product_id, chat_id, sub_category_id):
+        User = Query()
+        data = self.products.search((User.id > product_id) & (User.sub_category == sub_category_id) & (User.chat_id == chat_id))
+        if len(data) == 0:
+            data = self.products.search((User.id > 0) & (User.sub_category == sub_category_id) & (User.chat_id == chat_id))
+        return len(data)
+
+    def get_product_back_count(self, product_id, chat_id, sub_category_id):
+        User = Query()
+        data = self.products.search((User.id < product_id) & (User.sub_category == sub_category_id) & (User.chat_id == chat_id))
+        if len(data) == 0:
+            max_id = self.products.search((User.sub_category == sub_category_id) & (User.chat_id == chat_id))
+            data = self.products.search((User.id == max_id[-1]['id']) & (User.sub_category == sub_category_id) & (User.chat_id == chat_id))
+        return len(data)
+    
+    def get_product_count(self, product_id, chat_id, sub_category_id):
+        User = Query()
+        data = self.products.search((User.sub_category == sub_category_id) & (User.chat_id == chat_id))
+        return len(data)
+
 # test = DB('db.json')
 # get_sub_category = test.update_order(16)
 # print(get_sub_category)
