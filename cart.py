@@ -13,7 +13,7 @@ from main import Shop
 shop = Shop()
 
 db = DB('db.json')
-base_url = 'https://sanjarbekkutubxona.pythonanywhere.com'
+base_url = 'https://storemarket.pythonanywhere.com'
 
 
 class Cart:
