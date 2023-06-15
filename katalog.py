@@ -43,13 +43,33 @@ class Katalog:
 
         inline_keyboard = []
         for sub_category in data_sub_categories:
-            inline_keyboard.append([InlineKeyboardButton(sub_category['name'], callback_data=f"sub_category_{sub_category['id']}")])
-        
+            inline_keyboard.append([InlineKeyboardButton(sub_category['name'], callback_data=f"sub_category_{katalog_id}_{sub_category['id']}")])
+
         if inline_keyboard == []:
             text = 'Kategoriyada mahsulotlar yo\'q'
             query.bot.edit_message_text(text=text, chat_id=chat_id, message_id=query.message.message_id)
             return
+        
+        inline_keyboard.append([InlineKeyboardButton('⬅️ Orqaga qaytish', callback_data=f"backe_katalog_{katalog_id}_{katalog_id}")])
+
         text = 'Kategoriya tanlang'
+        reply_markup = InlineKeyboardMarkup(inline_keyboard)
+        query.edit_message_text(text=text, reply_markup=reply_markup)
+
+    def back_katalog(self, update: Update, context: CallbackContext):
+        query = update.callback_query
+        chat_id = query.message.chat_id
+
+        data = query.data.split('_')
+        katalog_id = int(data[-1])
+
+        data_katalogs = db.get_categories(chat_id=chat_id)
+
+        inline_keyboard = []
+        for katalog in data_katalogs:
+            inline_keyboard.append([InlineKeyboardButton(katalog['name'], callback_data=f"katalog_{katalog['id']}")])
+
+        text = 'Kataloglarni tanlang'
         reply_markup = InlineKeyboardMarkup(inline_keyboard)
         query.edit_message_text(text=text, reply_markup=reply_markup)
 
@@ -61,12 +81,12 @@ class Katalog:
 
         data = query.data.split('_')
         sub_category_id = int(data[-1])
+        katalog_id = int(data[-2])
 
         data_products = db.get_products(chat_id=chat_id, sub_category_id=sub_category_id)
         
         if data_products == []:
             text = 'Kategoriyada mahsulotlar yo\'q'
-            query.bot.edit_message_text(text=text, chat_id=chat_id, message_id=query.message.message_id)
             return
 
         for product in data_products:
@@ -81,12 +101,42 @@ class Katalog:
                     InlineKeyboardButton('⬅️ Orqaga', callback_data=f"backe_{sub_category_id}_{product['id']}"),
                     InlineKeyboardButton('🛒 Savatga qo\'shish', callback_data=f"add_cart_{sub_category_id}_{product['id']}"),
                     InlineKeyboardButton('➡️ Oldinga', callback_data=f"next_{sub_category_id}_{product['id']}"),
+                ],
+                [
+                    InlineKeyboardButton('⬅️ Orqaga qaytish', callback_data=f'backe_product_{katalog_id}')
                 ]
             ]
             reply_markup = InlineKeyboardMarkup(inline_keyboard)
 
             query.bot.send_photo(chat_id=chat_id, photo=image, caption=caption, reply_markup=reply_markup)
             break
+
+    def backe_product_out(self, update: Update, context: CallbackContext):
+        query = update.callback_query
+        chat_id = query.message.chat_id
+        bot = query.bot
+
+        data = query.data.split('_')
+        katalog_id = int(data[-1])
+
+        data_sub_categories = db.get_sub_categories(chat_id=chat_id, categories_id=katalog_id)
+
+        inline_keyboard = []
+        for sub_category in data_sub_categories:
+            inline_keyboard.append([InlineKeyboardButton(sub_category['name'], callback_data=f"sub_category_{katalog_id}_{sub_category['id']}")])
+
+        if inline_keyboard == []:
+            text = 'Kategoriyada mahsulotlar yo\'q'
+            query.bot.edit_message_text(text=text, chat_id=chat_id, message_id=query.message.message_id)
+            return
+        
+        inline_keyboard.append([InlineKeyboardButton('⬅️ Orqaga qaytish', callback_data=f"backe_katalog_{katalog_id}_{katalog_id}")])
+
+        text = 'Kategoriya tanlang'
+        reply_markup = InlineKeyboardMarkup(inline_keyboard)
+        query.edit_message_caption('⬅️ Orqaga qaytish', reply_markup=None)
+        
+        bot.send_message(chat_id, text, reply_markup=reply_markup)
 
     def next_product(self, update: Update, context: CallbackContext):
         query = update.callback_query

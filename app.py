@@ -53,6 +53,8 @@ def index():
     dispatcher.add_handler(MessageHandler(Filters.location, cart.add_order))
     dispatcher.add_handler(MessageHandler(Filters.contact, user.add_user))
     dispatcher.add_handler(CallbackQueryHandler(cart.refresh, pattern='refresh_'))
+    dispatcher.add_handler(CallbackQueryHandler(katalog.back_katalog, pattern='backe_katalog_'))
+    dispatcher.add_handler(CallbackQueryHandler(katalog.backe_product_out, pattern='backe_product_'))
     dispatcher.add_handler(CallbackQueryHandler(katalog.sub_categories, pattern='katalog_'))
     dispatcher.add_handler(CallbackQueryHandler(katalog.products, pattern='sub_category_'))
     dispatcher.add_handler(CallbackQueryHandler(katalog.next_product, pattern='next_'))
@@ -68,6 +70,7 @@ def index():
     dispatcher.add_handler(MessageHandler(Filters.text, auth_bot.auth_user))
     dispatcher.add_handler(CallbackQueryHandler(auth_bot.yes, pattern='yes'))
     dispatcher.add_handler(CallbackQueryHandler(auth_bot.no, pattern='no'))
+
 
     dispatcher.process_update(update)
     return 'ok'

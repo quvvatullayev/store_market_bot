@@ -8,7 +8,7 @@ from contact import Contact
 from user_aouth import Auth_bot
 
 
-TOKEN = '5677023630:AAHkbfD1-l1RWMw7Q56_wBQKR4XzHXunVjs'
+TOKEN = "5677023630:AAHkbfD1-l1RWMw7Q56_wBQKR4XzHXunVjs"
 
 shop = Shop()
 katalog = Katalog()
@@ -44,6 +44,8 @@ dispatcher.add_handler(MessageHandler(Filters.text('✏️ Buyurtmalarni taxrirl
 dispatcher.add_handler(MessageHandler(Filters.location, cart.add_order))
 dispatcher.add_handler(MessageHandler(Filters.contact, user.add_user))
 dispatcher.add_handler(CallbackQueryHandler(cart.refresh, pattern='refresh_'))
+dispatcher.add_handler(CallbackQueryHandler(katalog.back_katalog, pattern='backe_katalog_'))
+dispatcher.add_handler(CallbackQueryHandler(katalog.backe_product_out, pattern='backe_product_'))
 dispatcher.add_handler(CallbackQueryHandler(katalog.sub_categories, pattern='katalog_'))
 dispatcher.add_handler(CallbackQueryHandler(katalog.products, pattern='sub_category_'))
 dispatcher.add_handler(CallbackQueryHandler(katalog.next_product, pattern='next_'))
