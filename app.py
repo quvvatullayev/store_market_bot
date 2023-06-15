@@ -75,7 +75,7 @@ def index():
 
 @app.route('/setwebhook', methods=['GET', 'POST'])
 def set_webhook():
-    s = bot.set_webhook('https://storemarket.pythonanywhere.com')
+    s = bot.set_webhook('https://storemarketbot.pythonanywhere.com/')
     if s:
         return "webhook setup ok"
     else:
