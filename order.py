@@ -49,8 +49,9 @@ class Order:
                     text += f'💵 Narxi: {price} so\'m\n'
                     text += f'🧮 Soni: {order["count"]} ta\n'
                     count = '{:,.0f}'.format(order["count"] * order["product"]["price"])
-                    text += f'💰 {order["count"]} x {order["product"]["price"]} = {count} so\'m\n\n'
+                    text += f'💰 {order["count"]} x {order["product"]["price"]} = {count} so\'m\n'
                     sum_all += order["count"] * order["product"]["price"]
+                    text += '--------------------------------\n\n'
                 sum_all = '{:,.0f}'.format(sum_all)
                 text += f'💰 Jami: {sum_all} so\'m\n\n'
 
@@ -164,8 +165,9 @@ class Order:
                         text += f'💵 Narxi: {price} so\'m\n'
                         text += f'🧮 Soni: {order["count"]} ta\n'
                         count = '{:,.0f}'.format(order["count"] * order["product"]["price"])
-                        text += f'💰 {order["count"]} x {order["product"]["price"]} = {count} so\'m\n\n'
+                        text += f'💰 {order["count"]} x {order["product"]["price"]} = {count} so\'m\n'
                         sum_all += order["count"] * order["product"]["price"]
+                        text += '--------------------------------\n\n'
                 all_sum = '{:,.0f}'.format(sum_all)
                 text += f'💰 Jami: {all_sum} so\'m\n\n'
 
@@ -216,8 +218,9 @@ class Order:
                         text += f'💵 Narxi: {price} so\'m\n'
                         text += f'🧮 Soni: {order["count"]} ta\n'
                         count = '{:,.0f}'.format(order["count"] * order["product"]["price"])
-                        text += f'💰 {order["count"]} x {order["product"]["price"]} = {count} so\'m\n\n'
+                        text += f'💰 {order["count"]} x {order["product"]["price"]} = {count} so\'m\n'
                         sum_all += order["count"] * order["product"]["price"]
+                        text += '--------------------------------\n\n'
                 all_sum = '{:,.0f}'.format(sum_all)
                 text += f'💰 Jami: {all_sum} so\'m\n\n'
 
@@ -266,8 +269,9 @@ class Order:
                         text += f'💵 Narxi: {price} so\'m\n'
                         text += f'🧮 Soni: {order["count"]} ta\n'
                         count = '{:,.0f}'.format(order["count"] * order["product"]["price"])
-                        text += f'💰 {order["count"]} x {order["product"]["price"]} = {count} so\'m\n\n'
+                        text += f'💰 {order["count"]} x {order["product"]["price"]} = {count} so\'m\n'
                         sum_all += order["count"] * order["product"]["price"]
+                        text += '--------------------------------\n\n'
                 all_sum = '{:,.0f}'.format(sum_all)
                 text += f'💰 Jami: {all_sum} so\'m\n\n'
 
@@ -314,8 +318,9 @@ class Order:
                         text += f'💵 Narxi: {price} so\'m\n'
                         text += f'🧮 Soni: {order["count"]} ta\n'
                         count = '{:,.0f}'.format(order["count"] * order["product"]["price"])
-                        text += f'💰 {order["count"]} x {order["product"]["price"]} = {count} so\'m\n\n'
+                        text += f'💰 {order["count"]} x {order["product"]["price"]} = {count} so\'m\n'
                         sum_all += order["count"] * order["product"]["price"]
+                        text += '--------------------------------\n\n'
                 all_sum = '{:,.0f}'.format(sum_all)
                 text += f'💰 Jami: {all_sum} so\'m\n\n'
 

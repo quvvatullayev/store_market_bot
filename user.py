@@ -95,7 +95,8 @@ class UserClass:
                 price = '{:,.0f}'.format(order["product"]["price"])
                 text += f'📦 Buyurtma narxi: {price}so\'m\n'
                 count = '{:,.0f}'.format(order["product"]["price"] * order["count"])
-                text += f'📦 Buyurtma umumiy narxi: {count}so\'m\n\n'
+                text += f'📦 Buyurtma umumiy narxi: {count}so\'m\n'
+                text += '----------------------------------------\n\n'
 
 
         keyboard = [
