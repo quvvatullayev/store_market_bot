@@ -9,6 +9,7 @@ from telegram import (
 from telegram.ext import CallbackContext
 from db import DB
 from main import Shop
+from pprint import pprint
 
 shop = Shop()
 db = DB('db.json')
@@ -79,30 +80,50 @@ class UserClass:
         bot = context.bot
         chat_id = update.message.chat_id
 
+        bot.send_message(chat_id=chat_id, text='Iltoimos kuting...')
+
         orders = db.get_order_list()['data']
         text = '📝 Kelgan zakazlar\n\n'
+        data = {}
         for order in orders:
-            if order['status'] == False:
-                user = order['user']
-                text += f'🆔 Buyurtma raqami: {order["id"]}\n'
-                text += f'👤 Username: @{user["username"]}\n'
-                text += f'👤 Ism: {user["first_name"]}\n'
-                text += f'👤 Familiya: {user["last_name"]}\n'
-                text += f'📞 Telefon raqam: {user["phone"]}\n'
-                text += f'📍 Manzil: {user["address"]}\n\n'
-                text += f'📦 Buyurtma: {order["product"]["name"]}\n'
-                text += f'📦 Buyurtma soni: {order["count"]}\n'
-                price = '{:,.0f}'.format(order["product"]["price"])
-                text += f'📦 Buyurtma narxi: {price}so\'m\n'
-                count = '{:,.0f}'.format(order["product"]["price"] * order["count"])
-                text += f'📦 Buyurtma umumiy narxi: {count}so\'m\n'
-                text += '----------------------------------------\n\n'
-
+            if data.get(order['user']['last_name']):
+                data[order['user']['last_name']].append(order)
+            else:
+                data[order['user']['last_name']] = [order]
+        n = 1
+        for key, value in data.items():
+            # chack status
+            user = value[0]['user']
+            text += f'🪪 {n} - zakazlar\n'
+            text += "-----------------------------------------------------\n"
+            text += f'👤 {user["first_name"]} {user["last_name"]}\n'
+            text += f'📞 {user["phone"]}\n'
+            text += f'📍 {user["address"]}\n\n'
+            # len
+            for order in value:
+                if not order['status']:
+                    # buyurtma id
+                    text += f'🆔 Buyurtma id {order["id"]}\n'
+                    # buyurtma nomi
+                    text += f'🧩 Buyurtma nomi {order["product"]["name"]}\n'
+                    # buyurtma narxi
+                    price = '{:,.0f}'.format(order['product']['price'])
+                    text += f'💰 Buyurtma narxi {price} so\'m\n'
+                    # buyurtma soni
+                    text += f'🧮 Buyurtma soni {order["count"]} ta\n'
+                    # buyurtma summasi
+                    price = '{:,.0f}'.format(order['count'] * order['product']['price'])
+                    text += f'💰 Buyurtma summasi {price} so\'m\n'  
+                    # buyurtma holati
+                    if order['status']:
+                        text += f'📝 Buyurtma holati ✅\n\n'
+                    else:
+                        text += f'📝 Buyurtma holati ☑️\n\n'
+            n += 1
 
         keyboard = [
             ['📝 Buyurtma informations','🏠 Bosh sahifa']
         ]
-        
         reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
         
         bot.send_message(chat_id=chat_id, text=text, reply_markup=reply_markup)
