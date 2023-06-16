@@ -86,7 +86,7 @@ class DB:
         data = self.products.search((User.id < product_id) & (User.sub_category == sub_category_id) & (User.chat_id == chat_id))
         if len(data) == 0:
             max_id = self.products.search((User.sub_category == sub_category_id) & (User.chat_id == chat_id))
-            data = self.products.search((User.id == max_id[-1]['id']) & (User.sub_category == sub_category_id) & (User.chat_id == chat_id))
+            data = self.products.search((User.id <= max_id[-1]['id']) & (User.sub_category == sub_category_id) & (User.chat_id == chat_id))
         return data
 
     def add_user(self, username, first_name, last_name, chat_id, phone, address):

@@ -192,7 +192,7 @@ class Katalog:
 
         query.bot.edit_message_reply_markup(reply_markup=None, chat_id=chat_id, message_id=query.message.message_id)
 
-        product = db.get_back_product(product_id=product_id, chat_id=chat_id, sub_category_id=sub_category_id)[0]
+        product = db.get_back_product(product_id=product_id, chat_id=chat_id, sub_category_id=sub_category_id)[-1]
 
         image = base_url + product['image']
         name = product['name']
