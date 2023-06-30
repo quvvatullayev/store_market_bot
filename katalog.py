@@ -255,7 +255,8 @@ class Katalog:
                 query.bot.send_message(chat_id=chat_id, text=text)
         
         except:
-
+            # edit message
+            query.edit_message_reply_markup(reply_markup=None)
             text = "Iltimos avval ro'yxatdan o'ting\n\n"
             text += "🔐 ro'yxatdan o'tish tubmasini bosing"
 
