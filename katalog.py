@@ -228,6 +228,7 @@ class Katalog:
 
         try:
             text = 'Iltooms kuting ...'
+            get_user = db.get_user(chat_id=chat_id)
             
             try:
                 get_product = db.get_product_id(product_id=product_id)
