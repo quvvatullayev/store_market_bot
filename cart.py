@@ -83,8 +83,9 @@ class Cart:
         else:
             text = 'Savatdagi mahsulotlar:\n\n'
             for cart in data_cart:
-                product = db.get_product_by_id(product_id=cart['product'], chat_id=chat_id)[0]
-                text += f"📦 Nomi: {product['name']}\n💰 Narxi: {'{:,.0f}'.format(product['price'])} so'm\n📝 Ta'rif: {product['discription']}\n🧮 Mahsulot soni: {cart['count']}\n\n"
+                products = db.get_product_by_id(product_id=cart['product'], chat_id=chat_id)
+                for product in products:
+                    text += f"📦 Nomi: {product['name']}\n💰 Narxi: {'{:,.0f}'.format(product['price'])} so'm\n📝 Ta'rif: {product['discription']}\n🧮 Mahsulot soni: {cart['count']}\n\n"
 
             inline_keyboard = [
                 [
