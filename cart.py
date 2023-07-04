@@ -82,10 +82,12 @@ class Cart:
             return True
         else:
             text = 'Savatdagi mahsulotlar:\n\n'
+            inline_keyboarddelete = []
             for cart in data_cart:
                 products = db.get_product_by_id(product_id=cart['product'], chat_id=chat_id)
                 for product in products:
                     text += f"📦 Nomi: {product['name']}\n💰 Narxi: {'{:,.0f}'.format(product['price'])} so'm\n📝 Ta'rif: {product['discription']}\n🧮 Mahsulot soni: {cart['count']}\n\n"
+                    inline_keyboarddelete.append([InlineKeyboardButton(f"🗑 {product['name']}", callback_data=f"delete_{product['id']}")])
 
             inline_keyboard = [
                 [
@@ -94,6 +96,7 @@ class Cart:
                     InlineKeyboardButton('🗑 Tozalash', callback_data=f"clear_cart_{chat_id}"),
                 ]
             ]
+            inline_keyboard = inline_keyboarddelete + inline_keyboard
 
             reply_markup = InlineKeyboardMarkup(inline_keyboard)
             bot.send_message(chat_id=chat_id, text=text, reply_markup=reply_markup)
@@ -128,3 +131,42 @@ class Cart:
         chat_id = query.message.chat_id
         query.bot.edit_message_reply_markup(reply_markup=None, chat_id=chat_id, message_id=query.message.message_id)
         shop.start_refresh(update=update, context=context, chat_id=chat_id, first_name=query.from_user.first_name)
+
+    def delete_card_product(self, update: Update, context: CallbackContext):
+        query = update.callback_query
+        bot = context.bot
+        product_id = query.data.split('_')[1]
+        
+        chat_id = query.message.chat_id
+        db.delete_product_card(chat_id=chat_id, product_id=int(product_id))
+        
+        data_cart = db.get_cart(chat_id=chat_id)
+        query.bot.edit_message_reply_markup(reply_markup=None, chat_id=chat_id, message_id=query.message.message_id)
+
+
+        if len(data_cart) == 0:
+
+            text = '📭 Savat bo\'sh\n\n'
+            
+            bot.send_message(chat_id=chat_id, text=text)
+            return True
+        else:
+            text = 'Savatdagi mahsulotlar:\n\n'
+            inline_keyboarddelete = []
+            for cart in data_cart:
+                products = db.get_product_by_id(product_id=cart['product'], chat_id=chat_id)
+                for product in products:
+                    text += f"📦 Nomi: {product['name']}\n💰 Narxi: {'{:,.0f}'.format(product['price'])} so'm\n📝 Ta'rif: {product['discription']}\n🧮 Mahsulot soni: {cart['count']}\n\n"
+                    inline_keyboarddelete.append([InlineKeyboardButton(f"🗑 {product['name']}", callback_data=f"delete_{product['id']}")])
+
+            inline_keyboard = [
+                [
+                    InlineKeyboardButton('📝 Buyurtma', callback_data=f"order_{chat_id}"),
+                    InlineKeyboardButton('🔄 Yangilash', callback_data=f"refresh_{chat_id}"),
+                    InlineKeyboardButton('🗑 Tozalash', callback_data=f"clear_cart_{chat_id}"),
+                ]
+            ]
+            inline_keyboard = inline_keyboarddelete + inline_keyboard
+
+            reply_markup = InlineKeyboardMarkup(inline_keyboard)
+            bot.send_message(chat_id=chat_id, text=text, reply_markup=reply_markup)

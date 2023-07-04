@@ -44,6 +44,7 @@ dispatcher.add_handler(MessageHandler(Filters.text('✏️ Buyurtmalarni taxrirl
 dispatcher.add_handler(MessageHandler(Filters.location, cart.add_order))
 dispatcher.add_handler(MessageHandler(Filters.contact, user.add_user))
 dispatcher.add_handler(CallbackQueryHandler(cart.refresh, pattern='refresh_'))
+dispatcher.add_handler(CallbackQueryHandler(cart.delete_card_product, pattern='delete_'))
 dispatcher.add_handler(CallbackQueryHandler(katalog.back_katalog, pattern='backe_katalog_'))
 dispatcher.add_handler(CallbackQueryHandler(katalog.backe_product_out, pattern='backe_product_'))
 dispatcher.add_handler(CallbackQueryHandler(katalog.sub_categories, pattern='katalog_'))

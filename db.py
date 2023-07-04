@@ -196,7 +196,13 @@ class DB:
         User = Query()
         data = self.products.search((User.sub_category == sub_category_id) & (User.chat_id == chat_id))
         return len(data)
+    
+    def delete_product_card(self, product_id, chat_id):
+        User = Query()
+        data = self.carts.remove((User.product == product_id) & (User.chat_id == chat_id))
+        print(data)
+        return data
 
 # test = DB('db.json')
-# get_sub_category = test.update_order(16)
+# get_sub_category = test.delete_product_card(product_id=31, chat_id=5503011861)
 # print(get_sub_category)
